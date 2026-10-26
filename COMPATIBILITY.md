@@ -11,7 +11,7 @@ Host versions each stage was tested against, and the outcome of its acceptance s
 
 ## Checks, stage 1
 
-All on Windows 11 Pro (10.0.26200), Node 24.19.0, against the working tree before the stage 1 commit.
+All on Windows 11 Pro (10.0.26200), Node 24.19.0. The local checks ran against the working tree before the stage 1 commit; the GitHub checks ran against commit `22fc0dc`.
 
 | Host | Version | Source | Check | Outcome |
 | --- | --- | --- | --- | --- |
@@ -20,8 +20,12 @@ All on Windows 11 Pro (10.0.26200), Node 24.19.0, against the working tree befor
 | Claude Code | 2.1.306 | local checkout, `--plugin-dir`, non-interactive | `/task-os:setup` on a copy of `fixtures/engagement-b/folder` | completed in 91 turns. Originals unchanged; 17 records with valid frontmatter. Findings in [docs/stage-1-findings.md](docs/stage-1-findings.md) |
 | Codex CLI | 0.163.0 | local checkout, isolated `CODEX_HOME` in a path with a space | `marketplace add`, `plugin add` of all three plugins | installed into the plugin cache; the id script runs from the cached path |
 | Codex CLI | 0.163.0 | same | `codex debug prompt-input` | the model sees `task-os:brief`, `task-os:capture`, `task-os:handoff`, `task-os-grill:grill` and `task-os-writing:writing` with full descriptions; `task-os:setup` is hidden from implicit use, as configured |
+| Claude Code | 2.1.306 | GitHub `ossianravn/task-os-agent-plugin` at `22fc0dc`, isolated `CLAUDE_CONFIG_DIR` | `marketplace add`, `install` of all three plugins, `plugin details` | installed from the plugin cache; same four core skills; the id script runs from the cached copy |
+| Codex CLI | 0.163.0 | GitHub at `22fc0dc`, isolated `CODEX_HOME` | `marketplace add`, `plugin add` of all three plugins, `codex debug prompt-input` | installed; the model sees the same five skills |
 
-Not exercised: installing from GitHub (stage 1 is not pushed yet), a live Codex session, explicit `$task-os:setup` in Codex, the Codex desktop app, WSL and macOS.
+The first GitHub attempt failed in both hosts with Git's "Filename too long", because the isolated test folders sat under a 130-character temporary path and the clone's deepest file reached 270 characters. With `core.longpaths` set for the test processes only, both installs passed. Under a normal `C:\Users\<name>\.claude` or `.codex`, the deepest file is about 165 characters, well under Windows' 260-character limit.
+
+Not exercised: a live Codex session, explicit `$task-os:setup` in Codex, the Codex desktop app, WSL and macOS.
 
 ## Host behaviour observed
 
