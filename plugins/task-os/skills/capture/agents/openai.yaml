@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task OS capture"
+  short_description: "Save a finding, decision or log entry with its evidence"
+  default_prompt: "Capture this as a Task OS record."

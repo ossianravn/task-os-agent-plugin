@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "task-os-writing",
+  "version": "0.1.0",
+  "description": "Rules for the text agents read in a Task OS hub",
+  "author": { "name": "ossianravn" },
+  "repository": "https://github.com/ossianravn/task-os-agent-plugin",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Task OS Writing",
+        "shortDescription": "Write instructions agents follow the same way every run",
+        "developerName": "ossianravn",
+        "category": "Productivity"
+      }
+    }
+  }
+}

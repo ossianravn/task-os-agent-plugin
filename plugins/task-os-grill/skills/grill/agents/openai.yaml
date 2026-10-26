@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task OS grill"
+  short_description: "Settle decisions in rounds and record them"
+  default_prompt: "Grill me on the open decisions for this workstream."

@@ -322,7 +322,7 @@ Concurrency: one runtime environment owns a hub's index and lock. On Windows wit
 
 ## 9. Skills
 
-Skills carry the reasoning; each one is a `skills/<name>/SKILL.md` that tells the agent what to do and which CLI commands to call, written to the rules in section 6. Every skill folder also has `agents/openai.yaml` (Codex display name, short description, invocation policy) so Codex lists it; `setup`, `tidy` and `doctor` are user-invoked, the rest may be model-invoked. Each SKILL.md starts by resolving the workspace (`taskos doctor --quiet` or the first real command) and stops with a clear message on `workspace_missing`.
+Skills carry the reasoning; each one is a `skills/<name>/SKILL.md` that tells the agent what to do and which CLI commands to call, written to the rules in section 6. Every skill folder also has `agents/openai.yaml` (Codex display name, short description, invocation policy) so Codex lists it; `setup`, `tidy` and `doctor` are user-invoked, the rest may be model-invoked. Each SKILL.md starts by resolving the workspace (`taskos doctor --quiet` or the first real command) and stops with a clear message on `workspace_missing`. Keep each skill description under 200 characters, triggers included: Codex 0.163.0 shows no more than that in its skill list.
 
 | Skill | Steps | Calls |
 | --- | --- | --- |
@@ -370,6 +370,7 @@ Notes that are facts about the hosts (verify against section 14 docs when implem
 - A `Stop` hook's `decision: block` creates a continuation prompt; `stop_hook_active` is true on that continuation, so the check above cannot loop.
 - Codex skips plugin hooks until the user reviews them in `/hooks`; `doctor` reports hook trust and tells the user the command. Claude Code shows plugin hooks at install.
 - Hooks run with the session `cwd`; repo-local relative paths are unreliable, hence `${CLAUDE_PLUGIN_ROOT}`.
+- OpenAI's packaging guide (checked 2026-10-26) says plugin lifecycle hooks apply only to manually installed Codex desktop plugins, and that Codex hook commands can use `${PLUGIN_ROOT}`. Stage 2 checks both in the Codex CLI before relying on the hooks or on `${CLAUDE_PLUGIN_ROOT}` there.
 
 The explicit `handoff` skill, not the hook, is the primary path: the Stop prompt exists for the session that forgot.
 
@@ -391,7 +392,7 @@ Core manifests:
 { "name": "task-os", "version": "0.1.0", "description": "Engagement workspace, memory and way of work" }
 ```
 
-Claude Code discovers `skills/`, `hooks/hooks.json` and `.mcp.json` from the plugin root by convention; Codex discovers `skills/` and `mcp.json` and takes hooks from the manifest. Keep the `.mcp.json` / `mcp.json` pair empty until the MCP server ships in stage 3, then declare the stdio server in both with the host's own format rather than copying one file to the other name.
+Claude Code discovers `skills/`, `hooks/hooks.json` and `.mcp.json` from the plugin root by convention; Codex discovers `skills/`, `mcp.json` and `hooks/hooks.json` by default; a `hooks` value in the manifest replaces that default instead of adding to it. Keep the `.mcp.json` / `mcp.json` pair empty until the MCP server ships in stage 3, then declare the stdio server in both with the host's own format rather than copying one file to the other name.
 
 Marketplace files:
 

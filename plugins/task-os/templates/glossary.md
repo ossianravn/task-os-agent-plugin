@@ -1,0 +1,4 @@
+# Glossary
+
+| Term | Aliases | Meaning |
+| --- | --- | --- |

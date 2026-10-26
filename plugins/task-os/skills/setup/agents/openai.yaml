@@ -1,0 +1,6 @@
+interface:
+  display_name: "Task OS setup"
+  short_description: "Adopt this folder as an engagement hub"
+  default_prompt: "Set up this folder as a Task OS engagement hub."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,22 @@
+{
+  "name": "task-os",
+  "owner": { "name": "ossianravn" },
+  "description": "Task OS: engagement workspace, memory and way of work for Claude Code and Codex.",
+  "plugins": [
+    {
+      "name": "task-os",
+      "source": "./plugins/task-os",
+      "description": "Core: adopt a folder as an engagement hub, brief, capture and hand off."
+    },
+    {
+      "name": "task-os-grill",
+      "source": "./plugins/task-os-grill",
+      "description": "Interview that settles decisions a round at a time and records each one."
+    },
+    {
+      "name": "task-os-writing",
+      "source": "./plugins/task-os-writing",
+      "description": "Rules for the text agents read in a Task OS hub."
+    }
+  ]
+}

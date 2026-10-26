@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "task-os",
+  "version": "0.1.0",
+  "description": "Engagement workspace, memory and way of work for Claude Code and Codex",
+  "author": { "name": "ossianravn" },
+  "repository": "https://github.com/ossianravn/task-os-agent-plugin",
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup/SKILL.md",
+      "interface": {
+        "displayName": "Task OS",
+        "shortDescription": "Structured engagement memory for client work",
+        "longDescription": "Adopt an existing folder as an engagement hub, start each session from a brief, save findings and decisions with their evidence, and hand off to the next session in either host.",
+        "developerName": "ossianravn",
+        "category": "Productivity",
+        "defaultPrompt": ["Brief me on this engagement."]
+      }
+    }
+  }
+}

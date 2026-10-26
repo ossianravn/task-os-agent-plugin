@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task OS handoff"
+  short_description: "Leave the next session what it needs"
+  default_prompt: "Write the Task OS handoff for this session."

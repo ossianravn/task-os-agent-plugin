@@ -1,0 +1,24 @@
+{
+  "name": "task-os",
+  "interface": { "displayName": "Task OS" },
+  "plugins": [
+    {
+      "name": "task-os",
+      "source": { "source": "local", "path": "./plugins/task-os" },
+      "policy": { "installation": "INSTALLED_BY_DEFAULT", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    },
+    {
+      "name": "task-os-grill",
+      "source": { "source": "local", "path": "./plugins/task-os-grill" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    },
+    {
+      "name": "task-os-writing",
+      "source": { "source": "local", "path": "./plugins/task-os-writing" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

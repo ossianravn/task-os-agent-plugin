@@ -1,0 +1,9 @@
+{
+  "name": "task-os-grill",
+  "displayName": "Task OS Grill",
+  "version": "0.1.0",
+  "description": "Task OS interview that settles decisions a round at a time and records each one",
+  "author": { "name": "ossianravn" },
+  "repository": "https://github.com/ossianravn/task-os-agent-plugin",
+  "dependencies": ["task-os"]
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Task OS writing"
+  short_description: "Write instructions agents follow the same way every run"

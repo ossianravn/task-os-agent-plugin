@@ -1,0 +1,8 @@
+{
+  "name": "task-os-writing",
+  "displayName": "Task OS Writing",
+  "version": "0.1.0",
+  "description": "Rules for the text agents read in a Task OS hub",
+  "author": { "name": "ossianravn" },
+  "repository": "https://github.com/ossianravn/task-os-agent-plugin"
+}
