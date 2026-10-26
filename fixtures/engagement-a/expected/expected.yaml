@@ -1,0 +1,232 @@
+# Expected results for engagement-a, written before any agent run (SPEC.md section 13).
+# Records are matched by type, basis, state and citations, never by id (docs/decisions/001).
+# Citations are paths in folder/ with line ranges as committed.
+
+fixture: engagement-a
+as_of: 2026-10-16            # tests pin the clock to this date
+shape: >-
+  Embedded consultant on a web analytics engagement. Reaches GA4, GTM, Jira and
+  Azure DevOps directly; order data arrives only through Mette.
+
+adoption:                    # scenario 1
+  untouched: every file in folder/ except AGENTS.md, byte for byte
+  agents_md: the existing ten lines unchanged, followed by exactly one Task OS block
+  claude_md: per SPEC.md section 6; either absent or containing only the @AGENTS.md import
+  mappings:
+    legacy_log: notes/project-log.md
+    communication_doc: docs/how-we-communicate.md
+    source_roots: [client-files/, people.md, systems.md]
+  indexed_sources:
+    - notes/project-log.md
+    - docs/how-we-communicate.md
+    - people.md
+    - systems.md
+    - client-files/tickets/ACME-1187.md
+    - client-files/analytics/ga4-purchases-by-payment-type_20260923-20260928.csv  # '#' lines before the header
+  skipped_sources:
+    - { path: client-files/screenshots/gtm-consent-settings.png, reason: not text }
+  conflict_reported:
+    existing: AGENTS.md#L6       # append a dated entry to the log at the end of every session
+    task_os: >-
+      The legacy log is never rewritten (SPEC.md section 4, rule 1); a session ends with
+      a handoff record.
+    expected: setup shows both texts, asks which wins, and records the answer in work/ways-of-working.md
+  interview:
+    answered_by_files:
+      - people, roles, authority and channels (people.md, docs/how-we-communicate.md)
+      - systems and access, except Azure DevOps (systems.md)
+      - communication practices and what never goes out without review (docs/how-we-communicate.md)
+      - the success criterion (notes/project-log.md#L5)
+    must_ask:
+      - the person's own role, confirming the engagement shape above
+      - Azure DevOps access; systems.md#L6 says read access, notes/project-log.md#L11 says pending
+      - the AGENTS.md conflict above
+      - the first task worth finishing together
+      - modules and Jev judgment kinds
+  resume: after an interruption at the second answer, rerunning setup continues at the next unanswered question
+
+records:
+  - { key: P-karen, type: person, name: Karen Dahl, role: Head of Digital, authority: decides,
+      channels: [email], aliases: [KD, Head of Digital],
+      cites: [people.md#L5, docs/how-we-communicate.md#L3-L6] }
+  - { key: P-jonas, type: person, name: Jonas Lund, role: Lead developer, authority: recommends,
+      channels: [teams, jira], aliases: [JL], cites: [people.md#L6, docs/how-we-communicate.md#L8-L10] }
+  - { key: P-mette, type: person, name: Mette Krogh, role: Marketing analyst, authority: informed,
+      channels: [email], aliases: [MK], cites: [people.md#L7, docs/how-we-communicate.md#L12-L14] }
+  - { key: S-ga4, type: system, access: direct,
+      resources: [properties/123456 production, properties/123457 staging], cites: [systems.md#L3] }
+  - { key: S-gtm, type: system, access: direct, cites: [systems.md#L4] }
+  - { key: S-jira, type: system, access: direct, resources: [ACME/WEB], cites: [systems.md#L5] }
+  - { key: S-azure-devops, type: system, access: as the user confirms in the interview, cites: [systems.md#L6] }
+  - { key: S-shop-backend, type: system, access: via_client, supplied_by: P-mette, cites: [systems.md#L7] }
+  - key: W-tracking
+    type: workstream
+    outcome: GA4 purchases within 2% of the shop backend's orders, per payment method, by the end of October
+    next_action: as in continuation.next_action
+  - key: D1
+    type: decision
+    gist: Success means GA4 purchases within 2% of the backend's orders, per payment method, by the end of October
+    basis: reported            # Karen's criterion, as recorded in the log
+    state: current
+    cites: [notes/project-log.md#L4-L5]
+  - key: F1
+    type: finding
+    gist: In August GA4 recorded 4,789 purchases against 5,840 orders in the backend, about 18% short
+    basis: reported            # GA4 count observed, order count reported (docs/decisions/002)
+    state: current
+    cites: [notes/project-log.md#L14-L16]
+  - key: F2
+    type: finding
+    gist: Jonas reports that the duplicate-tag fix shipped to production in release 4.12 on 23 September at 14:05
+    basis: reported
+    state: current
+    cites: [client-files/tickets/ACME-1187.md#L16-L18]
+  - key: F3
+    type: finding
+    gist: The purchase gap is caused by the consent banner blocking GA4 because Consent Mode is not set up
+    basis: inferred            # written as fact in the log, with no evidence
+    state: superseded          # by C1
+    cites: [notes/project-log.md#L27]
+  - key: F4
+    type: finding
+    gist: After 4.12, GA4 recorded 1,172 purchases against 1,412 orders for 23–28 September, still 17% short
+    basis: reported            # decision 002
+    state: current
+    cites: [client-files/analytics/ga4-purchases-by-payment-type_20260923-20260928.csv, notes/project-log.md#L31-L33]
+  - key: C1
+    type: correction
+    supersedes: [F3]
+    gist: Consent Mode v2 has been set up in advanced mode since June, as seen in the GTM container
+    reason: The 24 September root cause assumed Consent Mode was missing; the container shows it is set up
+    basis: observed
+    state: current
+    cites: [notes/project-log.md#L36-L37, client-files/screenshots/gtm-consent-settings.png]  # screenshot: reference_only
+  - key: F5
+    type: finding
+    gist: For 23–28 September the gap sits in MobilePay (212 of 431, 51% short); card is 1.8% short and Klarna 9 of 13
+    basis: reported            # decision 002
+    state: current
+    cites: [client-files/analytics/ga4-purchases-by-payment-type_20260923-20260928.csv, notes/project-log.md#L38-L40]
+  - key: F6
+    type: finding
+    gist: MobilePay customers may pay in the app and never return to the confirmation page where the purchase event fires
+    basis: inferred
+    state: candidate
+    cites: [notes/project-log.md#L43-L44]
+  - key: T-1
+    type: task
+    number: 1
+    gist: Confirm that MobilePay purchases reach GA4 staging once ACME-1204 is deployed there
+    task_status: waiting       # on Jonas's deploy to staging
+    outcome: A MobilePay test order on staging arrives in property 123457 with a transaction_id
+    external: { system: jira, ref: ACME-1204, last_observed_status: In Progress, observed_at: 2026-10-13 }
+    cites: [notes/project-log.md#L47-L48]
+
+glossary:                    # aliases that recall must expand in both directions
+  - [køb, purchase]
+  - [kassen, checkout]
+  - [bekræftelse, bekraeftelse, confirmation page]
+  - [samtykke, consent]
+  - [cookiebanner, consent banner]
+  - [ordrerapport, order report]
+  - [betalingsform, payment method, payment type]
+  - [MobilePay, payment app]
+
+verify:                      # scenario 3; input inputs/2026-10-16-status-update-draft.md
+  ready_to_send: false
+  claims:
+    - line: 6
+      text: Fejlen med dobbelte GA4-tags er rettet i release 4.12
+      status: supported
+      evidence: [F2]
+      rewrite: state it as Jonas's report, with the production date of 23 September
+    - line: 6
+      text: købstrackingen virker nu korrekt
+      status: conflicting
+      evidence: [F4, F5]
+      rewrite: GA4 was still 17% short of the order report for 23–28 September, almost all of it in MobilePay
+    - line: 7
+      text: Det resterende hul skyldes cookiebanneret
+      status: conflicting      # the inference written as fact; superseded by C1
+      evidence: [F3, C1]
+      rewrite: drop it; the gap sits in MobilePay, and the cause is a hypothesis being tested (F6)
+    - line: 8
+      text: Kortbetalinger ligger nu inden for 2 %
+      status: qualified
+      evidence: [F5]
+      rewrite: name the period (23–28 September) and the source (Mette's order report)
+    - line: 9
+      text: MobilePay-rettelsen (ACME-1204) går i produktion i næste uge
+      status: evidence-needed  # only a staging estimate exists, as of 13 October
+      evidence: [T-1]
+      rewrite: Jonas expects ACME-1204 on staging; no production date is agreed
+    - line: 10
+      text: Vi når målet om 2 % for alle betalingsformer inden udgangen af oktober
+      status: evidence-needed  # assumed
+      evidence: []
+      rewrite: drop the forecast, or state the target without promising it
+  remaining_questions:
+    - Is ACME-1204 on staging yet? The last observation is from 13 October.
+    - The newest GA4 numbers cover 23–28 September; check them again before sending.
+  practices: the revised draft is in Danish, at most ten lines, and names the source of each number
+
+supersession:                # scenario 4
+  steps: capture F3; write a knowledge note "Purchase gap" whose derived_from cites F3; capture C1; reindex --full
+  recall_current: C1 for "What causes the purchase gap?"; F3 is not returned as current
+  include_superseded: F3 with state superseded, and C1's reason
+  needs_reconciliation: the "Purchase gap" note, with C1 as the replacement
+
+source_states:               # scenario 6, run against a temporary copy of folder/
+  changed: >-
+    A file descriptor cites client-files/tickets/ACME-1187.md#L18; the test then edits that line.
+    recall shows the new text, and claims reports the descriptor as stale.
+  unavailable: >-
+    Jira is not exposed in the session. task observe on T-1 returns source_unavailable, and T-1
+    keeps its 13 October observation.
+  malformed: A record with broken frontmatter is reported with its path and cause and never returned as current.
+
+continuation:                # scenario 2
+  goal: GA4 purchases within 2% of the shop backend's orders, per payment method, by the end of October
+  state:
+    - Jonas reports the duplicate-tag fix in production since 23 September (F2)
+    - GA4 is still 17% short for 23–28 September, almost all of it in MobilePay (F4, F5)
+    - Consent is ruled out (C1); the MobilePay return flow is the working hypothesis (F6)
+    - ACME-1204 was In Progress when last checked on 13 October (T-1)
+  next_action: >-
+    Check whether ACME-1204 is on staging. If it is, place a MobilePay test order and confirm the
+    purchase arrives in GA4 property 123457 with a transaction_id. Then draft Friday's update to
+    Karen and run verify before it goes to her.
+  practices:
+    - Friday update to Karen in Danish, at most ten lines, each number checked and attributed
+    - nothing leaves without the person's review; sending is the person's action
+    - report from property 123456; test orders only in 123457
+    - no user-level data in records or drafts
+
+retrieval:                   # scenarios 1 and 10; expect = must appear in the top five
+  - q: Why are purchases missing in GA4?
+    expect: [C1, F5, F6]
+    not_current: [F3]
+    sources: [notes/project-log.md#L36-L43]
+  - q: Hvorfor mangler der køb i GA4?
+    expect: [C1, F5, F6]
+    not_current: [F3]
+    needs: glossary alias køb ↔ purchase
+  - q: What success criterion did the Head of Digital set?
+    expect: [D1]
+    sources: [notes/project-log.md#L5]
+    needs: person alias Head of Digital ↔ Karen Dahl
+  - q: When did the duplicate-tag fix reach production?
+    expect: [F2]
+    sources: [client-files/tickets/ACME-1187.md#L18]
+  - q: What is the status of the MobilePay ticket?
+    expect: [T-1]
+    answer_states: In Progress, last observed 13 October
+  - q: Does the order report include cancelled orders?
+    expect: []                 # answered only by the legacy log
+    sources: [notes/project-log.md#L17]
+  - q: Is the payment app flow the problem?
+    expect: [F6, F5]
+    needs: glossary alias MobilePay ↔ payment app
+  - q: Which GA4 property gets test orders?
+    expect: [S-ga4]
+    sources: [systems.md#L3]

@@ -1,0 +1,173 @@
+# Expected results for engagement-b, written before any agent run (SPEC.md section 13).
+# Records are matched by type, basis, state and citations, never by id (docs/decisions/001).
+# Citations are paths in folder/ with line ranges as committed.
+
+fixture: engagement-b
+as_of: 2026-10-06            # tests pin the clock to this date
+shape: >-
+  Occasional work: a quarterly newsletter summary for Nordlys Cykler's board, requested and
+  received by mail through Anna. No access to the client's systems; numbers arrive as exports.
+
+adoption:                    # scenarios 1 and 9
+  untouched: every file in folder/, byte for byte
+  agents_md: created, containing only the Task OS block
+  claude_md: per SPEC.md section 6; either absent or containing only the @AGENTS.md import
+  mappings:
+    legacy_log: none
+    communication_doc: none
+    source_roots: [mail/, from-client/, delivered/]
+  indexed_sources:
+    - mail/2026-07-20-re-nyhedsbrevet-i-2-kvartal.eml       # CRLF, UTF-8, 8bit
+    - mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml
+    - mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml
+    - from-client/nyhedsbrev-q3.csv                         # BOM, semicolons, DD-MM-YYYY dates
+    - delivered/2026-07-15-nyhedsbrev-q2-rapport.md
+  skipped_sources: []
+  interview:                 # an occasional job: the first four questions, then the closing module question
+    asks:
+      - the work, the person's role and what success looks like
+      - how work reaches the person and how it is delivered (mail from Anna; the report goes to Anna, who forwards it)
+      - each system the work depends on and how it is reached (Mailchimp, through Anna)
+      - current priorities and the first task (the Q3 summary)
+      - modules and Jev judgment kinds
+    does_not_ask:
+      - decision-makers and collaborators beyond Anna
+      - communication practices beyond confirming the two rules in the feedback mail
+
+records:
+  - key: P-anna
+    type: person
+    name: Anna Vinther
+    role: Marketingansvarlig (marketing manager), Nordlys Cykler
+    authority: decides
+    channels: [email]
+    preferences: >-
+      One page, because several board members read it on their phones. No abbreviations such as
+      CTR or KPI; write "klik" and "mål". Send it to her; she forwards it to the board.
+    cites: [mail/2026-07-20-re-nyhedsbrevet-i-2-kvartal.eml#L14-L18]
+  - key: S-mailchimp
+    type: system
+    access: via_client
+    supplied_by: P-anna
+    cites: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L16, mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml#L13]
+  - key: T-1
+    type: task
+    number: 1
+    gist: One-page Q3 newsletter summary for the board
+    task_status: active
+    due: 2026-10-19
+    outcome: A one-page summary in Danish with Anna before the board meeting on Thursday 22 October
+    next_action: as in continuation.next_action
+    external: none
+    cites: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L12]
+  - key: F1
+    type: finding
+    gist: Anna reports a Q3 open rate of 41%, the highest the newsletter has had
+    basis: reported
+    state: current
+    cites: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L14]
+  - key: F2
+    type: finding
+    gist: >-
+      The export's four campaigns, 2 July to 20 August, reached 16,586 recipients with 6,262 unique
+      opens (37.8%) and 1,076 unique clicks (6.5%)
+    basis: observed
+    scope: 2026-07-02 to 2026-08-20, the rows in the export
+    state: current
+    cites: [from-client/nyhedsbrev-q3.csv#L1-L5]
+  - key: F3
+    type: finding
+    gist: nyhedsbrev-q3.csv holds no September campaigns, although its name says Q3
+    basis: observed
+    state: current
+    cites: [from-client/nyhedsbrev-q3.csv#L2-L5, mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml#L13]
+
+ways_of_working:             # written by setup; no communication document to point at
+  - Task OS defaults, including draft-first
+  - Danish
+  - one page
+  - no abbreviations such as CTR or KPI; write "klik" and "mål"
+  - deliver to Anna, never to the board directly
+
+glossary:
+  - [åbningsrate, open rate]
+  - [klikrate, klik, click rate, CTR]
+  - [bestyrelsen, the board]
+  - [nyhedsbrev, newsletter]
+  - [kvartal, quarter]
+  - [3. kvartal, Q3]
+  - [udtræk, export]
+
+verify:                      # scenario 9; input inputs/2026-10-06-q3-rapport-udkast.md
+  ready_to_send: false
+  claims:
+    - line: 5
+      text: Åbningsraten var 41 % i 3. kvartal
+      status: conflicting      # reported for Q3; observed 37.8% for July and August only
+      evidence: [F1, F2, F3]
+      rewrite: >-
+        Name both sources: Anna gives 41% for the quarter; the Mailchimp export for July and
+        August shows 37.8%; September is not in the export.
+    - line: 5
+      text: den højeste nogensinde
+      status: evidence-needed  # Anna's word; our reports cover Q1 (33.9%) and Q2 (35.2%) only, and one Q2 campaign reached 41.3%
+      evidence: [F1]
+      rewrite: compare with the quarters we have figures for, once the Q3 figure is settled
+    - line: 5
+      text: en klar stigning fra 35,2 % i 2. kvartal
+      status: supported
+      evidence: [delivered/2026-07-15-nyhedsbrev-q2-rapport.md#L7]
+      rewrite: keep; it depends on the Q3 figure above
+    - line: 6
+      text: 6,5 % af modtagerne klikkede på et link
+      status: qualified
+      evidence: [F2]
+      rewrite: say July and August
+    - line: 7
+      text: '"Klar til skolestart" var kvartalets bedste nyhedsbrev med 39 % åbninger'
+      status: qualified
+      evidence: [F2]
+      rewrite: the best of the four July and August campaigns
+    - line: 8
+      text: Vi sendte 4 nyhedsbreve i kvartalet
+      status: qualified
+      evidence: [F2, F3]
+      rewrite: four in July and August; September is unknown
+  remaining_questions:
+    - Which campaigns went out in September, and what were their numbers?
+    - How did Anna arrive at 41%? It could include September, or use Mailchimp's own rate, which leaves out bounced mail.
+  practices: the revised draft has no abbreviations, fits on one page, and goes to Anna
+
+continuation:                # scenario 9
+  goal: A one-page Q3 newsletter summary in Danish, with Anna by Monday 19 October for the board meeting on 22 October
+  state:
+    - Anna reports 41% for Q3 (F1)
+    - the export covers July and August only, 37.8% opens and 6.5% clicks (F2, F3)
+    - no September numbers yet
+  next_action: >-
+    Ask Anna for the September campaigns and how she arrived at 41%; then draft the summary and
+    run verify before sending it to her.
+  practices:
+    - one page, in Danish, no abbreviations
+    - deliver to Anna; she forwards it to the board
+    - name the source of each number
+    - draft-first; sending is the person's action
+
+retrieval:                   # scenario 10; expect = must appear in the top five
+  - q: Hvad var åbningsraten i Q3?
+    expect: [F1, F2]           # both, with basis and scope visible
+    sources: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L14, from-client/nyhedsbrev-q3.csv]
+  - q: What did the client say about the last report?
+    expect: [P-anna]
+    sources: [mail/2026-07-20-re-nyhedsbrevet-i-2-kvartal.eml#L12-L18]
+  - q: Who sends us the newsletter numbers?
+    expect: [S-mailchimp, P-anna]
+  - q: What was the click rate in Q2?
+    expect: []                 # answered only by the delivered report
+    sources: [delivered/2026-07-15-nyhedsbrev-q2-rapport.md#L8]
+    needs: glossary alias click rate ↔ CTR
+  - q: When is the board meeting?
+    expect: [T-1]
+    sources: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L12]
+  - q: Which months are missing from the export?
+    expect: [F3]

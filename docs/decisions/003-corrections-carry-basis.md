@@ -1,0 +1,3 @@
+# 003 — Corrections carry basis and knowledge state
+
+SPEC.md section 5 listed `finding`, `decision` and `lesson` as claim-bearing but not `correction`, although a correction states what is true instead of the record it supersedes. A correction therefore carries `basis` and `knowledge_state` like a finding, and needs `source_refs` when its basis is `reported` or `observed`. Without them, `verify` could not judge whether a correction is supported, and the fixture's 6 October correction (Consent Mode is set up, seen in the GTM container) would have no basis. SPEC.md section 5 now lists `correction` among the claim-bearing types.

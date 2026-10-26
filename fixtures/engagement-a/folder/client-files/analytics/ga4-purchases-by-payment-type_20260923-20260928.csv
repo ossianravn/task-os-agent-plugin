@@ -1,0 +1,9 @@
+# ----------------------------------------
+# Purchases by payment type
+# Acme Webshop – Production (123456)
+# 20260923-20260928
+# ----------------------------------------
+Payment type,Transactions,Purchase revenue
+card,951,812340.50
+mobilepay,212,163870.00
+klarna,9,10215.00
