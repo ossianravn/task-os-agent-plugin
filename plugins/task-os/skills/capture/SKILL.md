@@ -1,6 +1,6 @@
 ---
 name: capture
-description: Save engagement material as a Task OS record or log entry, with its basis and sources. Use when something worth keeping comes up in a Task OS hub, or the user says log, capture or note.
+description: Save project material as a Task OS record or log entry, with its basis and sources. Use when something worth keeping comes up in a Task OS hub, or the user says log, capture or note.
 ---
 
 # Task OS capture

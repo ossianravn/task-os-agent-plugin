@@ -5,12 +5,12 @@
 <h1 align="center">Task OS</h1>
 
 <p align="center">
-  <b>Your assistant for client work, in Claude Code and Codex.</b><br>
-  It knows the client, does the work you hand it, keeps track of every task and decision, and picks up tomorrow where you left off today.
+  <b>Your assistant for projects and tasks, in Claude Code and Codex.</b><br>
+  It knows the project, does the work you hand it, keeps track of every task and decision, and picks up tomorrow where you left off today.
 </p>
 
 <p align="center">
-  <a href="#install"><img src="https://img.shields.io/badge/version-0.1.0-1f5f8b" alt="Version 0.1.0"></a> <a href="#claude-code"><img src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" alt="Claude Code plugin"></a> <a href="#codex"><img src="https://img.shields.io/badge/Codex-plugin-111111" alt="Codex plugin"></a> <a href="#what-you-need"><img src="https://img.shields.io/badge/Node.js-22.18%2B-5FA04E" alt="Node.js 22.18 or later"></a> <a href="#status"><img src="https://img.shields.io/badge/status-stage%201%3A%20skills%20only-c9a227" alt="Status: stage 1, skills only"></a>
+  <a href="#install"><img src="https://img.shields.io/badge/version-0.2.0-1f5f8b" alt="Version 0.2.0"></a> <a href="#claude-code"><img src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" alt="Claude Code plugin"></a> <a href="#codex"><img src="https://img.shields.io/badge/Codex-plugin-111111" alt="Codex plugin"></a> <a href="#what-you-need"><img src="https://img.shields.io/badge/Node.js-22.18%2B-5FA04E" alt="Node.js 22.18 or later"></a> <a href="#status"><img src="https://img.shields.io/badge/status-stage%201%3A%20skills%20only-c9a227" alt="Status: stage 1, skills only"></a>
 </p>
 
 <p align="center">
@@ -19,14 +19,14 @@
 
 ---
 
-Task OS turns Claude Code or Codex into an assistant for one client engagement: a long consulting mandate, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books: what's open, who's waiting on whom, what was decided, and what every number rests on.
+Task OS turns Claude Code or Codex into an assistant for one project: your part of a team's work inside a company, a client assignment, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books: what's open, who's waiting on whom, what was decided, and what every number rests on.
 
 Everything lives as plain files in the folder you already work from, so the assistant you open tomorrow, in either agent, knows what today's did.
 
 ## What your assistant does
 
-- **Knows the client.** Who decides and who only needs to be told, how each person wants to hear from you, which systems you can open yourself and which only through the client, and the client's own terms.
-- **Does the work you hand it.** Analyses, replies, ticket text, summaries for a board, written for the person who will read them, in their language.
+- **Knows the project.** Who decides and who only needs to be told, how each person wants to hear from you, which systems you can open yourself and which only through someone else, and the project's own terms.
+- **Does the work you hand it.** Analyses, replies, ticket text, summaries for your manager or a board, written for the person who will read them, in their language.
 - **Keeps track.** Every task with its owner, status and next step; every decision with who made it; every session closed with a note on where things stand.
 - **Checks before it claims.** Each finding says how we know it and where it came from, down to the line. A figure someone mentioned in a mail is kept as what they said, not as fact.
 - **Asks before anything leaves.** It drafts; you send. Its standing rules are written in your folder, where you can change them.
@@ -45,9 +45,9 @@ Tomorrow you can open Codex instead of Claude Code, or the other way round. The 
 
 ## See it work
 
-A test run on a fictional client: three saved mails, one spreadsheet and last quarter's report. The client wrote that the newsletter's open rate *"was 41% in Q3, the highest we've ever had. Feel free to include it."* The export she sent was named `nyhedsbrev-q3.csv`, but it held only July and August.
+A test run on a fictional project: a quarterly newsletter report, with three saved mails, one spreadsheet and last quarter's report. Anna, who asked for the report, wrote that the open rate *"was 41% in Q3, the highest we've ever had. Feel free to include it."* The export she sent was named `nyhedsbrev-q3.csv`, but it held only July and August.
 
-Setup needed four answers. It noticed the mismatch and, instead of repeating the 41%, drafted a question to the client. This is the finding it wrote, shortened:
+Setup needed four answers. It noticed the mismatch and, instead of repeating the 41%, drafted a question to Anna. This is the finding it wrote, shortened:
 
 ```markdown
 ---
@@ -84,11 +84,11 @@ flowchart LR
   draft --> out["Names both sources<br>asks for September"]
 ```
 
-The fixture and what a correct run must produce are in [fixtures/engagement-b](fixtures/engagement-b/).
+The fixture and what a correct run must produce are in [fixtures/project-b](fixtures/project-b/).
 
 ## How it works
 
-You run `setup` once in your client folder. It reads what's there, asks what the files can't tell it, and writes down the engagement: the people, the systems, the open work, and how you want things done. After that, four skills keep the assistant on track:
+You run `setup` once in your project folder. It reads what's there, asks what the files can't tell it, and writes down the project: the people, the systems, the open work, and how you want things done. After that, four skills keep the assistant on track:
 
 | Skill | What it does |
 | --- | --- |
@@ -129,9 +129,9 @@ Every claim carries its **basis**, so the next session knows how much weight it 
 
 ## Why it exists
 
-Task OS grew out of real consulting work run this way: a client folder, an `AGENTS.md` with house rules, a project log and a handoff file, with Claude doing the legwork. It worked. It was also fragile. The log kept growing, and every session had to reread it. The house rules lived in that one folder and would have to be written again for the next client. And once, a number read from the wrong column of a log reached the client before anyone checked it against the source that could settle it.
+Task OS grew out of real consulting work run this way: a project folder, an `AGENTS.md` with house rules, a project log and a handoff file, with Claude doing the legwork. It worked. It was also fragile. The log kept growing, and every session had to reread it. The house rules lived in that one folder and would have to be written again for the next project. And once, a number read from the wrong column of a log reached the client before anyone checked it against the source that could settle it.
 
-Task OS keeps what worked and gives it structure: a record for each claim, task and decision, the evidence attached, and a brief instead of a long reread.
+Task OS keeps what worked and gives it structure: a record for each claim, task and decision, the evidence attached, and a brief instead of a long reread. Nothing in it is specific to consulting; the same setup works for your own tasks inside a company or a team.
 
 ## Install
 
@@ -183,18 +183,18 @@ Start a new Codex session. Running `/skills` lists `task-os:setup`, `task-os:bri
 
 ### Set up a folder
 
-Open your agent in the folder you work from for one client: notes, saved mails and exports, or an existing repository.
+Open your agent in the folder you work from for one project: notes, saved mails and exports, or an existing repository.
 
 - In Claude Code, submit `/task-os:setup`.
 - In Codex, type `$`, choose `task-os:setup`, and submit.
 
-Setup lists what it found and what it takes each file to be, then asks about the gaps: the work and your role, how work reaches you, which systems you can reach yourself and which only through the client, and the first task worth finishing. A short job takes four questions. Setup ends by finishing that task with you and writing the first handoff.
+Setup lists what it found and what it takes each file to be, then asks about the gaps: the work and your role, how work reaches you, which systems you can reach yourself and which only through someone else, and the first task worth finishing. A short job takes four questions. Setup ends by finishing that task with you and writing the first handoff.
 
 ## Your files stay yours
 
 - **Nothing moves.** Setup never moves, renames or rewrites a file. It appends one block to `AGENTS.md`, plus a one-line `@AGENTS.md` import in `CLAUDE.md` when Claude Code would otherwise skip `AGENTS.md`. Everything else it writes is new.
 - **Nothing leaves.** The plugin makes no network calls and needs no account. Your agent reaches only the integrations you have already connected to it.
-- **Mail is data, not orders.** An instruction inside a client's mail or ticket is quoted to you, not followed.
+- **Mail is data, not orders.** An instruction inside a mail or ticket is quoted to you, not followed.
 - **Plain files.** Records are markdown with a short header, so you can read, search and commit them like any notes.
 
 ```text
@@ -219,7 +219,7 @@ Task OS is built in stages, each tested against the [fixtures](fixtures/) before
 
 | Stage | Adds | State |
 | --- | --- | --- |
-| 0 | Two test engagements, with the results a correct run must produce | Done |
+| 0 | Two test projects, with the results a correct run must produce | Done |
 | 1 | The skills above; the assistant writes records as markdown | **Now**: a week of real use |
 | 2 | The `taskos` command line, search across records and your files, automatic brief and handoff prompts, `recall`, `verify` and `task` | Next |
 | 3 | Corrections that replace earlier records, `tidy`, `doctor`, an MCP server, optional Jev judgments | Planned |
@@ -248,6 +248,6 @@ Removing the plugin leaves your folders and records as they are.
 ## Development
 
 - [SPEC.md](SPEC.md) is the implementation spec, and [docs/decisions/](docs/decisions/) records the choices it left open.
-- [fixtures/](fixtures/) holds the test engagements and their expected results; [docs/stage-1-findings.md](docs/stage-1-findings.md) collects what real use turns up.
+- [fixtures/](fixtures/) holds the test projects and their expected results; [docs/stage-1-findings.md](docs/stage-1-findings.md) collects what real use turns up.
 - Check the packaging with `claude plugin validate .` and `claude plugin validate plugins/task-os`.
 - To try local changes, add the marketplace from your checkout path instead of GitHub. Claude Code reads a local marketplace in place; Codex copies each plugin into its cache, so reinstall with `codex plugin add` after a change.

@@ -1,11 +1,11 @@
-# Expected results for engagement-a, written before any agent run (SPEC.md section 13).
+# Expected results for project-a, written before any agent run (SPEC.md section 13).
 # Records are matched by type, basis, state and citations, never by id (docs/decisions/001).
 # Citations are paths in folder/ with line ranges as committed.
 
-fixture: engagement-a
+fixture: project-a
 as_of: 2026-10-16            # tests pin the clock to this date
 shape: >-
-  Embedded consultant on a web analytics engagement. Reaches GA4, GTM, Jira and
+  Embedded consultant on a web analytics project. Reaches GA4, GTM, Jira and
   Azure DevOps directly; order data arrives only through Mette.
 
 adoption:                    # scenario 1
@@ -38,7 +38,7 @@ adoption:                    # scenario 1
       - communication practices and what never goes out without review (docs/how-we-communicate.md)
       - the success criterion (notes/project-log.md#L5)
     must_ask:
-      - the person's own role, confirming the engagement shape above
+      - the person's own role, confirming the project shape above
       - Azure DevOps access; systems.md#L6 says read access, notes/project-log.md#L11 says pending
       - the AGENTS.md conflict above
       - the first task worth finishing together
@@ -58,7 +58,7 @@ records:
   - { key: S-gtm, type: system, access: direct, cites: [systems.md#L4] }
   - { key: S-jira, type: system, access: direct, resources: [ACME/WEB], cites: [systems.md#L5] }
   - { key: S-azure-devops, type: system, access: as the user confirms in the interview, cites: [systems.md#L6] }
-  - { key: S-shop-backend, type: system, access: via_client, supplied_by: P-mette, cites: [systems.md#L7] }
+  - { key: S-shop-backend, type: system, access: via_person, supplied_by: P-mette, cites: [systems.md#L7] }
   - key: W-tracking
     type: workstream
     outcome: GA4 purchases within 2% of the shop backend's orders, per payment method, by the end of October

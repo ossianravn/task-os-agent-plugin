@@ -1,9 +1,9 @@
 schema_version: 1
 id: <workspace id>            # never changes
 kind: hub
-name: <engagement name>
+name: <project name>
 timezone: <IANA timezone, such as Europe/Copenhagen>
-language: { default: <en>, client_facing: <da> }
+language: { default: <en>, outgoing: <da> }   # outgoing: text other people read
 mappings:                     # existing files, read as sources and never rewritten
   legacy_log: <path>          # omit when there is none
   communication_doc: <path>   # omit when there is none

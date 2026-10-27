@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Turn this folder into a Task OS engagement hub, or reconcile an existing one.
+description: Turn this folder into a Task OS project hub, or reconcile an existing one.
 disable-model-invocation: true
 ---
 
@@ -23,18 +23,18 @@ Adopt the folder in place, ask only what its files cannot tell you, write the hu
 3. **Interview.** Ask only what the inventory left open, one decision at a time, in this order. An occasional job needs only the first four.
    1. The work, the user's role, and what success looks like.
    2. How work reaches the user and how they deliver it: channels, cadence, recipients.
-   3. For each system the work depends on: does the user query it, does someone at the client send extracts or answers (who), or can the user not see it; and which client resource it means.
+   3. For each system the work depends on: does the user query it, does someone else send extracts or answers (who), or can the user not see it; and which resource it means.
    4. Current priorities, and the first task worth finishing together in this session.
    5. Decision-makers and collaborators: role, authority (decides, recommends, informed), channel, formality.
    6. Communication practices for each audience and channel, and what never goes out without review.
 
-   Then, for every engagement, ask which modules to enable: `task-os-grill` and `task-os-writing`. For a module that is not installed, give the install command for this host: in Claude Code `/plugin install task-os-grill@task-os`; in Codex `codex plugin add task-os-grill@task-os`. When the Task OS `grill` skill is available, run this interview in its rounds. Look up facts yourself; put only decisions to the user.
+   Then, for every project, ask which modules to enable: `task-os-grill` and `task-os-writing`. For a module that is not installed, give the install command for this host: in Claude Code `/plugin install task-os-grill@task-os`; in Codex `codex plugin add task-os-grill@task-os`. When the Task OS `grill` skill is available, run this interview in its rounds. Look up facts yourself; put only decisions to the user.
 4. **Write the hub.**
    - `.taskos/workspace.yaml` from `<plugin>/templates/workspace.yaml`.
    - `.taskos/local/profile.yaml`: `person` (the user's person id), `name`, `role`.
    - `.taskos/.gitignore` containing `local/`, `index.sqlite*` and `.lock`; `work/.gitignore` containing `sources/`.
    - `work/context.md`, `work/ways-of-working.md` and `work/glossary.md` from `<plugin>/templates/`. When a communication document is mapped, `ways-of-working.md` points at it and adds only the defaults and the user's decisions.
-   - A person record for the user and for each person named in step 3 or the inventory; a system record for each system, with `access` and, for `via_client`, `supplied_by`.
+   - A person record for the user and for each person named in step 3 or the inventory; a system record for each system, with `access` and, for `via_person`, `supplied_by`.
    - A workstream for the current work, and a task for each open piece of work the user confirms.
 5. **Instruction files.**
    - Read `<plugin>/templates/agents-block.md` and fill in the workspace id. Compare each of its lines with the existing `AGENTS.md`, `CLAUDE.md` and `CLAUDE.local.md` in this folder. For each conflict, show the user both texts, ask which wins, and record the answer with the date under "Decisions on instructions" in `work/ways-of-working.md`.

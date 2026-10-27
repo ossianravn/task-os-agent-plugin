@@ -1,10 +1,10 @@
-# <Engagement name>
+# <Project name>
 
 ## Mandate
 <What the work is, for whom, and what success looks like.>
 
 ## Shape
-<Embedded, contracted or occasional. How work reaches the person and how it is delivered. What they reach directly and what only through the client.>
+<Ongoing, contracted or occasional. How work reaches the person and how it is delivered. What they reach directly and what only through someone else.>
 
 ## Scope
 <In scope. Out of scope.>

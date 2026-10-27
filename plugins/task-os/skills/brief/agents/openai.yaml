@@ -1,4 +1,4 @@
 interface:
   display_name: "Task OS brief"
-  short_description: "Where this engagement stands"
-  default_prompt: "Brief me on this engagement."
+  short_description: "Where this project stands"
+  default_prompt: "Brief me on this project."

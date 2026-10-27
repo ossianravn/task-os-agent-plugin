@@ -27,7 +27,7 @@ Interview the user until no open decision remains, and write each decision down 
 
 ## Write as you go
 
-- **Workstream kick-off**: after each round, save every settled choice as a `decision` record with `basis: user_stated`, and every new client term as a glossary row, through the Task OS `capture` skill. When you finish, record the questions still open in the workstream's `state`.
+- **Workstream kick-off**: after each round, save every settled choice as a `decision` record with `basis: user_stated`, and every new project term as a glossary row, through the Task OS `capture` skill. When you finish, record the questions still open in the workstream's `state`.
 - **During setup**: the Task OS `setup` skill owns the questions and writes the answers; you run them in rounds.
 
 Write records only through the Task OS `capture` skill, so they follow its record format.

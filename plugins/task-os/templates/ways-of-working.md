@@ -3,8 +3,8 @@
 <When a communication document is mapped:> Practices for each audience are in `<path>`. Read it before writing to anyone.
 
 ## Defaults
-- Draft first: anything addressed to the client stays a draft until the person sends it.
-- Name the source of every number in client-facing text.
+- Draft first: anything addressed to someone else stays a draft until the person sends it.
+- Name the source of every number in text someone else will read.
 - Tag each consequential statement with its basis.
 - Never send: <what setup recorded, such as user-level data or screenshots that show customer data>.
 

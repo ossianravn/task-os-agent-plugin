@@ -1,8 +1,8 @@
-# Expected results for engagement-b, written before any agent run (SPEC.md section 13).
+# Expected results for project-b, written before any agent run (SPEC.md section 13).
 # Records are matched by type, basis, state and citations, never by id (docs/decisions/001).
 # Citations are paths in folder/ with line ranges as committed.
 
-fixture: engagement-b
+fixture: project-b
 as_of: 2026-10-06            # tests pin the clock to this date
 shape: >-
   Occasional work: a quarterly newsletter summary for Nordlys Cykler's board, requested and
@@ -47,7 +47,7 @@ records:
     cites: [mail/2026-07-20-re-nyhedsbrevet-i-2-kvartal.eml#L14-L18]
   - key: S-mailchimp
     type: system
-    access: via_client
+    access: via_person
     supplied_by: P-anna
     cites: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L16, mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml#L13]
   - key: T-1

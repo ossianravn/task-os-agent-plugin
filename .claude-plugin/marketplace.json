@@ -1,12 +1,12 @@
 {
   "name": "task-os",
   "owner": { "name": "ossianravn" },
-  "description": "Task OS: engagement workspace, memory and way of work for Claude Code and Codex.",
+  "description": "Task OS: your assistant for projects and tasks, in Claude Code and Codex.",
   "plugins": [
     {
       "name": "task-os",
       "source": "./plugins/task-os",
-      "description": "Core: adopt a folder as an engagement hub, brief, capture and hand off."
+      "description": "Core: adopt a folder as a project hub, brief, capture and hand off."
     },
     {
       "name": "task-os-grill",
