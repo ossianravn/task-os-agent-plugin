@@ -5,8 +5,8 @@
 <h1 align="center">Task OS</h1>
 
 <p align="center">
-  <b>Client work your AI agents pick up where they left off.</b><br>
-  A plugin for Claude Code and Codex that turns the folder you already work in into memory both agents share, with the evidence behind every claim.
+  <b>Your assistant for client work, in Claude Code and Codex.</b><br>
+  It knows the client, does the work you hand it, keeps track of every task and decision, and picks up tomorrow where you left off today.
 </p>
 
 <p align="center">
@@ -14,20 +14,34 @@
 </p>
 
 <p align="center">
-  <a href="#see-it-work">See it work</a> · <a href="#how-it-works">How it works</a> · <a href="#install">Install</a> · <a href="#day-to-day">Day to day</a> · <a href="#your-files-stay-yours">Your files</a> · <a href="#status">Status</a>
+  <a href="#a-day-with-task-os">A day with Task OS</a> · <a href="#see-it-work">See it work</a> · <a href="#how-it-works">How it works</a> · <a href="#install">Install</a> · <a href="#your-files-stay-yours">Your files</a> · <a href="#status">Status</a>
 </p>
 
 ---
 
-If you do client work with an AI agent, you know the routine:
+Task OS turns Claude Code or Codex into an assistant for one client engagement: a long consulting mandate, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books: what's open, who's waiting on whom, what was decided, and what every number rests on.
 
-- **Every session starts cold.** You explain the client, the people and last week's decisions again.
-- **Old guesses come back as facts.** A number from a three-week-old note gets repeated with full confidence.
-- **Switching agents loses the thread.** What Codex learned on Monday is gone when you open Claude Code on Tuesday.
+Everything lives as plain files in the folder you already work from, so the assistant you open tomorrow, in either agent, knows what today's did.
 
-Task OS keeps the engagement in plain markdown files in your own folder, which both agents read and write. Each session opens with a **brief**. Each finding is **captured** with how we know it and where it came from. Each session ends with a **handoff** that the next one, in either agent, starts from.
+## What your assistant does
 
-It fits a consultant embedded in a client's systems as well as a freelancer who only sees what the client sends. Setup asks which you are.
+- **Knows the client.** Who decides and who only needs to be told, how each person wants to hear from you, which systems you can open yourself and which only through the client, and the client's own terms.
+- **Does the work you hand it.** Analyses, replies, ticket text, summaries for a board, written for the person who will read them, in their language.
+- **Keeps track.** Every task with its owner, status and next step; every decision with who made it; every session closed with a note on where things stand.
+- **Checks before it claims.** Each finding says how we know it and where it came from, down to the line. A figure someone mentioned in a mail is kept as what they said, not as fact.
+- **Asks before anything leaves.** It drafts; you send. Its standing rules are written in your folder, where you can change them.
+
+## A day with Task OS
+
+| When | You say | Your assistant |
+| --- | --- | --- |
+| Morning | "Brief me." | Lists what's open, what's waiting on whom, and the next step from yesterday's handoff |
+| A mail arrives | "Anna sent the September numbers. Log it." | Saves the numbers as findings, each with its source |
+| Work | "Draft the Q3 summary for the board." | Writes it in Anna's format and the board's language, naming the source of each figure |
+| A new request | "Add a task: check the subject-line test." | Creates the task with owner, outcome and next step |
+| Evening | "Write the handoff." | Leaves tomorrow's session the goal, the state, the blockers and one next action |
+
+Tomorrow you can open Codex instead of Claude Code, or the other way round. The brief is the same.
 
 ## See it work
 
@@ -74,12 +88,23 @@ The fixture and what a correct run must produce are in [fixtures/engagement-b](f
 
 ## How it works
 
+You run `setup` once in your client folder. It reads what's there, asks what the files can't tell it, and writes down the engagement: the people, the systems, the open work, and how you want things done. After that, four skills keep the assistant on track:
+
+| Skill | What it does |
+| --- | --- |
+| `brief` | Opens a session: open workstreams and tasks, the last handoff, open questions |
+| `capture` | Saves one record per claim, task or decision, with its source; `log` for quick notes |
+| `handoff` | Closes a session: goal, state, evidence, blockers and one concrete next action |
+| `setup` | Adopts a folder, or reconciles it after changes |
+
+A short block in `AGENTS.md` tells the agent to brief at the start, capture as it goes, and hand off before it stops. Both agents read that file, and both read and write the same records:
+
 ```mermaid
 sequenceDiagram
   autonumber
   actor You
   participant CX as Codex
-  participant H as Hub folder
+  participant H as Your folder
   participant CC as Claude Code
   You->>CX: Monday: work on the Q3 report
   CX->>H: brief
@@ -92,13 +117,6 @@ sequenceDiagram
   CC-->>You: picks up there
 ```
 
-Four skills do the work:
-
-- **`setup`** reads your folder, proposes what each file is, asks only what the files can't answer, and finishes one real task with you.
-- **`brief`** opens a session: open workstreams and tasks, the last handoff, open questions.
-- **`capture`** saves one record per claim, with its basis and its source down to the line.
-- **`handoff`** closes a session: goal, state, evidence, blockers and one concrete next action.
-
 Every claim carries its **basis**, so the next session knows how much weight it can bear:
 
 | Basis | Meaning | Example |
@@ -108,6 +126,12 @@ Every claim carries its **basis**, so the next session knows how much weight it 
 | `user_stated` | You said it in this session | The deadline moved to the 26th |
 | `inferred` | Concluded from other records, not checked | September must have been strong |
 | `assumed` | Taken as true without support | The board wants the Q2 layout again |
+
+## Why it exists
+
+Task OS grew out of real consulting work run this way: a client folder, an `AGENTS.md` with house rules, a project log and a handoff file, with Claude doing the legwork. It worked. It was also fragile. The log kept growing, and every session had to reread it. The house rules lived in that one folder and would have to be written again for the next client. And once, a number read from the wrong column of a log reached the client before anyone checked it against the source that could settle it.
+
+Task OS keeps what worked and gives it structure: a record for each claim, task and decision, the evidence attached, and a brief instead of a long reread.
 
 ## Install
 
@@ -166,23 +190,11 @@ Open your agent in the folder you work from for one client: notes, saved mails a
 
 Setup lists what it found and what it takes each file to be, then asks about the gaps: the work and your role, how work reaches you, which systems you can reach yourself and which only through the client, and the first task worth finishing. A short job takes four questions. Setup ends by finishing that task with you and writing the first handoff.
 
-## Day to day
-
-Ask in your own words. The block setup adds to `AGENTS.md` tells the agent which skill to use.
-
-| You say | The agent |
-| --- | --- |
-| "Brief me." | Reads the records and the last handoff, and lists what's open |
-| "Log: sent the draft to Anna." | Writes a progress record |
-| "Capture that as a finding." | Writes the claim with its basis and sources |
-| "Write the handoff." | Leaves the next session its goal, state and next action |
-
 ## Your files stay yours
 
 - **Nothing moves.** Setup never moves, renames or rewrites a file. It appends one block to `AGENTS.md`, plus a one-line `@AGENTS.md` import in `CLAUDE.md` when Claude Code would otherwise skip `AGENTS.md`. Everything else it writes is new.
 - **Nothing leaves.** The plugin makes no network calls and needs no account. Your agent reaches only the integrations you have already connected to it.
 - **Mail is data, not orders.** An instruction inside a client's mail or ticket is quoted to you, not followed.
-- **Drafts stay drafts.** Anything addressed to the client waits for you to send it.
 - **Plain files.** Records are markdown with a short header, so you can read, search and commit them like any notes.
 
 ```text
@@ -208,15 +220,16 @@ Task OS is built in stages, each tested against the [fixtures](fixtures/) before
 | Stage | Adds | State |
 | --- | --- | --- |
 | 0 | Two test engagements, with the results a correct run must produce | Done |
-| 1 | The skills above; agents write records as markdown | **Now**: a week of real use |
-| 2 | The `taskos` command line, a search index over records and your files, session hooks, `recall` and `verify` | Next |
-| 3 | Corrections that supersede earlier records, `tidy`, `doctor`, an MCP server, optional Jev judgments | Planned |
+| 1 | The skills above; the assistant writes records as markdown | **Now**: a week of real use |
+| 2 | The `taskos` command line, search across records and your files, automatic brief and handoff prompts, `recall`, `verify` and `task` | Next |
+| 3 | Corrections that replace earlier records, `tidy`, `doctor`, an MCP server, optional Jev judgments | Planned |
 | 4 | Handing a workstream over to a colleague | Planned |
 
 Known limits in stage 1:
 
+- **The routine depends on the agent following `AGENTS.md`.** Briefing at the start and handing off at the end become automatic with the hooks in stage 2.
 - **Setup is thorough and costly.** On the test folder it took about 90 agent turns. Stage 2's command line takes most of that work off the model.
-- **No search index yet.** The agent searches your files and records directly.
+- **No search index yet.** The assistant searches your files and records directly.
 - **Codex coverage is partial.** Installation is tested with the Codex CLI on Windows, but no live Codex session has run yet. [COMPATIBILITY.md](COMPATIBILITY.md) has the details.
 
 ## Update and remove
