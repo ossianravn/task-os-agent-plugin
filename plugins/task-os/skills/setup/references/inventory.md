@@ -3,7 +3,7 @@
 Build a picture of the folder before asking the user anything. Cite each fact you take from a file as `path:line`.
 
 1. List every file under the folder, skipping `.git/`, `node_modules/`, `.taskos/` and `work/`. Note path, size and type.
-2. Read `AGENTS.md`, `CLAUDE.md`, `CLAUDE.local.md` and `.claude/CLAUDE.md` in this folder. Check every folder above it for `CLAUDE.md`, `CLAUDE.local.md` and `.claude/CLAUDE.md`; their presence decides setup step 5.
+2. Read `AGENTS.md`, `CLAUDE.md`, `CLAUDE.local.md` and `.claude/CLAUDE.md` in this folder. Check every folder above it for `CLAUDE.md`, `CLAUDE.local.md` and `.claude/CLAUDE.md`; their presence decides setup step 6.
 3. Identify the candidates for each mapping:
    - **Legacy log** (`legacy_log`): one file of dated entries that grows over time, with headings or lines that start with a date.
    - **Communication document** (`communication_doc`): describes how to work with each audience: channel, language, format, what never goes out.
