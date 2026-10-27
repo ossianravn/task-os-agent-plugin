@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-labelledby="t d" font-family="'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif">
+  <title id="t">What your agent can reach</title>
+  <desc id="d">Your agent reads and writes the Task OS records in work/, reads your own files, and reaches mail, Trello, Azure DevOps and analytics only through connections you set up in Claude Code or Codex. It changes things there only with your OK. Systems you cannot open reach you as exports in your files.</desc>
+  <defs>
+    <marker id="aN" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1F3A5F"/></marker>
+    <marker id="aT" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7A76"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#C2603A"/></marker>
+    <marker id="aG" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#9C9384"/></marker>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#5B4A30" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="598" rx="28" fill="#FBF7EF" stroke="#E9DEC9" stroke-width="2"/>
+  <text x="48" y="60" font-size="15" font-weight="700" letter-spacing="2" fill="#9A7B55">WHAT YOUR AGENT CAN REACH</text>
+
+  <!-- your folder -->
+  <rect x="48" y="96" width="312" height="360" rx="20" fill="#F3EADB" stroke="#DCCBAE" stroke-width="2"/>
+  <text x="72" y="128" font-size="13" font-weight="700" letter-spacing="2" fill="#9A7B55">YOUR FOLDER</text>
+  <g filter="url(#sh)">
+    <rect x="72" y="146" width="264" height="134" rx="14" fill="#FFFFFF" stroke="#C9D3E1"/>
+    <rect x="72" y="300" width="264" height="134" rx="14" fill="#FFFFFF" stroke="#E7D3A8"/>
+  </g>
+  <path d="M72 160a14 14 0 0 1 14-14h4v134h-4a14 14 0 0 1-14-14z" fill="#1F3A5F"/>
+  <path d="M72 314a14 14 0 0 1 14-14h4v134h-4a14 14 0 0 1-14-14z" fill="#D7A23A"/>
+  <g fill="#1F2A33">
+    <text x="108" y="186" font-size="22" font-weight="700">work/</text>
+    <text x="108" y="214" font-size="15" fill="#3F4A54">people, systems,</text>
+    <text x="108" y="235" font-size="15" fill="#3F4A54">tasks, records</text>
+    <text x="108" y="264" font-size="13" font-weight="600" fill="#1F3A5F">kept by Task OS</text>
+
+    <text x="108" y="340" font-size="22" font-weight="700">Your files</text>
+    <text x="108" y="368" font-size="15" fill="#3F4A54">notes, saved mail,</text>
+    <text x="108" y="389" font-size="15" fill="#3F4A54">exports, deliveries</text>
+    <text x="108" y="418" font-size="13" font-weight="600" fill="#9A6F14">read, never changed</text>
+  </g>
+
+  <!-- systems you cannot open -->
+  <rect x="48" y="500" width="312" height="66" rx="16" fill="#F6F2EA" stroke="#B9AE9B" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="72" y="528" font-size="16" font-weight="700" fill="#5D554A">Systems you can't open</text>
+  <text x="72" y="551" font-size="14" fill="#7A7164">someone sends you an export</text>
+  <path d="M300 498V466" stroke="#9C9384" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#aG)"/>
+  <text x="252" y="486" font-size="13" font-weight="600" fill="#7A7164" text-anchor="end">by mail</text>
+
+  <!-- the agent -->
+  <g filter="url(#sh)"><rect x="495" y="206" width="210" height="156" rx="26" fill="#1F3A5F"/></g>
+  <text x="600" y="256" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">Your agent</text>
+  <text x="600" y="284" font-size="15" fill="#C9D6E6" text-anchor="middle">Claude Code or Codex</text>
+  <rect x="524" y="306" width="152" height="30" rx="15" fill="#2A7A76"/>
+  <text x="600" y="326" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">with Task OS skills</text>
+
+  <!-- tools -->
+  <rect x="840" y="96" width="312" height="360" rx="20" fill="#E6F2F0" stroke="#BFDDD9" stroke-width="2"/>
+  <text x="864" y="128" font-size="13" font-weight="700" letter-spacing="2" fill="#2A7A76">TOOLS YOU CONNECT</text>
+  <g filter="url(#sh)" fill="#FFFFFF" stroke="#CFE4E1">
+    <rect x="864" y="146" width="128" height="116" rx="14"/>
+    <rect x="1004" y="146" width="128" height="116" rx="14"/>
+    <rect x="864" y="276" width="128" height="116" rx="14"/>
+    <rect x="1004" y="276" width="128" height="116" rx="14"/>
+  </g>
+  <!-- mail -->
+  <g transform="translate(928 192)" fill="none" stroke="#2A7A76" stroke-width="3" stroke-linejoin="round">
+    <rect x="-24" y="-16" width="48" height="34" rx="5"/><path d="M-22-13 0 4 22-13"/>
+  </g>
+  <!-- trello-style board -->
+  <g transform="translate(1068 192)">
+    <rect x="-25" y="-18" width="50" height="38" rx="6" fill="none" stroke="#2A7A76" stroke-width="3"/>
+    <rect x="-17" y="-10" width="12" height="22" rx="2" fill="#2A7A76"/><rect x="2" y="-10" width="12" height="13" rx="2" fill="#2A7A76"/>
+  </g>
+  <!-- devops: work item flow -->
+  <g transform="translate(928 322)" fill="none" stroke="#2A7A76" stroke-width="3" stroke-linecap="round">
+    <circle cx="-18" cy="-12" r="6"/><circle cx="-18" cy="14" r="6"/><circle cx="18" cy="0" r="6"/>
+    <path d="M-18-6v14M-12-12c14 0 18 4 24 8"/>
+  </g>
+  <!-- analytics -->
+  <g transform="translate(1068 322)" fill="#2A7A76">
+    <rect x="-22" y="0" width="10" height="16" rx="2"/><rect x="-6" y="-10" width="10" height="26" rx="2"/><rect x="10" y="-20" width="10" height="36" rx="2"/>
+    <path d="M-26 20h50" stroke="#2A7A76" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g font-size="16" font-weight="700" fill="#1F2A33" text-anchor="middle">
+    <text x="928" y="242">Mail</text><text x="1068" y="242">Trello</text>
+    <text x="928" y="372">Azure DevOps</text><text x="1068" y="372">Analytics</text>
+  </g>
+  <text x="864" y="420" font-size="13" fill="#3F6B68">and any other MCP server, plugin or</text>
+  <text x="864" y="438" font-size="13" fill="#3F6B68">connector you add to your agent</text>
+
+  <!-- connections -->
+  <g fill="none" stroke-width="2.5">
+    <path d="M340 213C410 213 430 250 489 250" stroke="#1F3A5F" marker-start="url(#aN)" marker-end="url(#aN)"/>
+    <path d="M340 367C410 367 430 318 489 318" stroke="#1F3A5F" stroke-dasharray="7 7" marker-end="url(#aN)"/>
+    <path d="M711 250C770 250 780 205 834 205" stroke="#2A7A76" marker-end="url(#aT)"/>
+    <path d="M711 318C770 318 780 360 834 360" stroke="#C2603A" stroke-dasharray="7 7" marker-end="url(#aR)"/>
+  </g>
+  <g font-size="13" font-weight="600" text-anchor="middle">
+    <rect x="364" y="170" width="118" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="423" y="188" fill="#1F3A5F">reads and writes</text>
+    <rect x="392" y="378" width="62" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="423" y="396" fill="#1F3A5F">reads</text>
+    <rect x="742" y="168" width="62" height="26" rx="13" fill="#FFFFFF" stroke="#BFDDD9"/><text x="773" y="186" fill="#2A7A76">reads</text>
+    <rect x="718" y="372" width="110" height="44" rx="14" fill="#FFFFFF" stroke="#E9C9B8"/>
+    <text x="773" y="390" fill="#C2603A">changes only</text><text x="773" y="407" fill="#C2603A">with your OK</text>
+  </g>
+
+  <!-- footnote -->
+  <g transform="translate(840 500)">
+    <path d="M14 2 26 7v10c0 8-5 13-12 16C7 30 2 25 2 17V7z" fill="#E6F2F0" stroke="#2A7A76" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M8 17l4 4 8-9" fill="none" stroke="#2A7A76" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="40" y="16" font-size="14" font-weight="700" fill="#1F2A33">Task OS makes no network calls.</text>
+    <text x="40" y="37" font-size="14" fill="#3F4A54">work/systems/ records how you reach</text>
+    <text x="40" y="57" font-size="14" fill="#3F4A54">each system, and who to ask.</text>
+  </g>
+</svg>

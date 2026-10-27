@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: Write this session's Task OS handoff record - goal, state, evidence, decisions, blockers, next action. Use before stopping work in a Task OS hub, or when the user asks for a handoff.
+description: Write this session's Task OS handoff - goal, state, evidence, decisions, blockers, next action. Use without being asked when work in a Task OS hub stops or the user signs off, or when asked.
 ---
 
 # Task OS handoff

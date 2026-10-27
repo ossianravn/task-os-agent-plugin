@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-labelledby="t d" font-family="'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif">
+  <title id="t">One project, two agents</title>
+  <desc id="d">On Monday Codex briefs, works, saves what it finds and writes a handoff into your folder. On Tuesday Claude Code reads that handoff first and carries on with the same next action.</desc>
+  <defs>
+    <marker id="aT" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#2A7A76"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#C2603A"/></marker>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#5B4A30" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="438" rx="28" fill="#FBF7EF" stroke="#E9DEC9" stroke-width="2"/>
+  <text x="48" y="60" font-size="15" font-weight="700" letter-spacing="2" fill="#9A7B55">ONE PROJECT, TWO AGENTS</text>
+
+  <!-- day cards -->
+  <g filter="url(#sh)">
+    <rect x="48" y="92" width="340" height="304" rx="20" fill="#FFFFFF" stroke="#C9D3E1"/>
+    <rect x="812" y="92" width="340" height="304" rx="20" fill="#FFFFFF" stroke="#BFDDD9"/>
+  </g>
+  <path d="M48 112a20 20 0 0 1 20-20h300a20 20 0 0 1 20 20v44H48z" fill="#1F3A5F"/>
+  <path d="M812 112a20 20 0 0 1 20-20h300a20 20 0 0 1 20 20v44H812z" fill="#2A7A76"/>
+  <text x="72" y="132" font-size="13" font-weight="700" letter-spacing="2" fill="#C9D6E6">MONDAY</text>
+  <text x="152" y="133" font-size="19" font-weight="700" fill="#FFFFFF">in Codex</text>
+  <text x="836" y="132" font-size="13" font-weight="700" letter-spacing="2" fill="#CFE9E6">TUESDAY</text>
+  <text x="926" y="133" font-size="19" font-weight="700" fill="#FFFFFF">in Claude Code</text>
+
+  <g font-size="16" fill="#1F2A33">
+    <g fill="#1F3A5F"><circle cx="82" cy="196" r="12"/><circle cx="82" cy="244" r="12"/><circle cx="82" cy="292" r="12"/><circle cx="82" cy="340" r="12"/></g>
+    <g font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle"><text x="82" y="201">1</text><text x="82" y="249">2</text><text x="82" y="297">3</text><text x="82" y="345">4</text></g>
+    <text x="106" y="201">Briefs from your folder</text>
+    <text x="106" y="249">Works on the Q3 report</text>
+    <text x="106" y="297">Saves what it finds, with sources</text>
+    <text x="106" y="345" font-weight="700" fill="#C2603A">Writes the handoff</text>
+
+    <g fill="#2A7A76"><circle cx="846" cy="196" r="12"/><circle cx="846" cy="244" r="12"/><circle cx="846" cy="292" r="12"/><circle cx="846" cy="340" r="12"/></g>
+    <g font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle"><text x="846" y="201">1</text><text x="846" y="249">2</text><text x="846" y="297">3</text><text x="846" y="345">4</text></g>
+    <text x="870" y="201" font-weight="700" fill="#C2603A">Reads Monday's handoff first</text>
+    <text x="870" y="249">Knows the next step</text>
+    <text x="870" y="297">Carries on; you retell nothing</text>
+    <text x="870" y="345">Adds today's work to the files</text>
+  </g>
+
+  <!-- the folder with the handoff -->
+  <path d="M470 156h70l14-16h70l14 16h78a14 14 0 0 1 14 14v170a14 14 0 0 1-14 14H484a14 14 0 0 1-14-14V170a14 14 0 0 1 14-14Z" fill="#F3EADB" stroke="#DCCBAE" stroke-width="2"/>
+  <text x="600" y="184" font-size="13" font-weight="700" letter-spacing="2" fill="#9A7B55" text-anchor="middle">work/  IN YOUR FOLDER</text>
+  <g filter="url(#sh)"><rect x="492" y="204" width="216" height="128" rx="14" fill="#FFFFFF" stroke="#E9C9B8"/></g>
+  <path d="M492 218a14 14 0 0 1 14-14h188a14 14 0 0 1 14 14v12H492z" fill="#C2603A"/>
+  <text x="512" y="256" font-size="12" font-weight="700" letter-spacing="1.5" fill="#C2603A">HANDOFF · NEXT ACTION</text>
+  <text x="512" y="284" font-size="18" font-weight="700" fill="#1F2A33">Ask Anna for the</text>
+  <text x="512" y="307" font-size="18" font-weight="700" fill="#1F2A33">September numbers</text>
+
+  <!-- arrows -->
+  <path d="M392 330C430 330 440 290 486 290" fill="none" stroke="#C2603A" stroke-width="2.5" marker-end="url(#aR)"/>
+  <path d="M712 268C760 268 770 210 806 210" fill="none" stroke="#2A7A76" stroke-width="2.5" marker-end="url(#aT)"/>
+  <g font-size="13" font-weight="600" text-anchor="middle">
+    <rect x="398" y="358" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#E9C9B8"/><text x="430" y="376" fill="#C2603A">writes</text>
+    <rect x="724" y="282" width="84" height="26" rx="13" fill="#FFFFFF" stroke="#BFDDD9"/><text x="766" y="300" fill="#2A7A76">reads first</text>
+  </g>
+</svg>

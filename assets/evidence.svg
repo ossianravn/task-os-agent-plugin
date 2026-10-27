@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450" role="img" aria-labelledby="t d" font-family="'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif">
+  <title id="t">Two sources, two findings</title>
+  <desc id="d">Anna's mail says 41 percent for Q3, recorded as reported. Her export shows 37.8 percent for July and August, recorded as observed. The draft for the board states both, names each source, and says September is not in the export yet.</desc>
+  <defs>
+    <marker id="aN" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#1F3A5F"/></marker>
+    <marker id="aT" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#2A7A76"/></marker>
+    <marker id="aR" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#C2603A"/></marker>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#5B4A30" flood-opacity="0.12"/></filter>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="448" rx="28" fill="#FBF7EF" stroke="#E9DEC9" stroke-width="2"/>
+  <text x="48" y="60" font-size="15" font-weight="700" letter-spacing="2" fill="#9A7B55">TWO SOURCES, TWO FINDINGS</text>
+
+  <g filter="url(#sh)">
+    <rect x="48" y="90" width="330" height="150" rx="18" fill="#FFFFFF" stroke="#E9C9B8"/>
+    <rect x="48" y="262" width="330" height="150" rx="18" fill="#FFFFFF" stroke="#BFDDD9"/>
+    <rect x="464" y="110" width="290" height="110" rx="16" fill="#FFFFFF" stroke="#E9C9B8"/>
+    <rect x="464" y="282" width="290" height="110" rx="16" fill="#FFFFFF" stroke="#BFDDD9"/>
+    <rect x="840" y="90" width="312" height="322" rx="18" fill="#FFFFFF" stroke="#C9D3E1"/>
+  </g>
+
+  <!-- sources -->
+  <g transform="translate(72 114)" fill="none" stroke="#C2603A" stroke-width="2.5" stroke-linejoin="round"><rect width="30" height="21" rx="3"/><path d="M1 2 15 12 29 2"/></g>
+  <text x="114" y="132" font-size="16" font-weight="700" fill="#1F2A33">Anna's mail, 1 October</text>
+  <text x="72" y="172" font-size="18" font-style="italic" fill="#3F4A54">"Our open rate was 41% in Q3,</text>
+  <text x="72" y="196" font-size="18" font-style="italic" fill="#3F4A54">the highest we've ever had."</text>
+  <rect x="72" y="208" width="92" height="22" rx="11" fill="#C2603A"/>
+  <text x="118" y="224" font-size="12" font-weight="700" letter-spacing="1" fill="#FFFFFF" text-anchor="middle">REPORTED</text>
+
+  <g transform="translate(72 286)" fill="none" stroke="#2A7A76" stroke-width="2.5"><rect width="26" height="24" rx="3"/><path d="M0 8h26M0 16h26M9 0v24"/></g>
+  <text x="112" y="304" font-size="16" font-weight="700" fill="#1F2A33">Her export, nyhedsbrev-q3.csv</text>
+  <text x="72" y="346" font-size="34" font-weight="700" fill="#2A7A76">37.8%</text>
+  <text x="182" y="333" font-size="14" fill="#3F4A54">opened, 4 newsletters</text>
+  <text x="182" y="352" font-size="14" font-weight="700" fill="#3F4A54">July and August only</text>
+  <rect x="72" y="380" width="92" height="22" rx="11" fill="#2A7A76"/>
+  <text x="118" y="396" font-size="12" font-weight="700" letter-spacing="1" fill="#FFFFFF" text-anchor="middle">OBSERVED</text>
+
+  <!-- findings -->
+  <path d="M464 126a16 16 0 0 1 16-16h258a16 16 0 0 1 16 16v4H464z" fill="#C2603A"/>
+  <path d="M464 298a16 16 0 0 1 16-16h258a16 16 0 0 1 16 16v4H464z" fill="#2A7A76"/>
+  <text x="488" y="152" font-size="12" font-weight="700" letter-spacing="1.5" fill="#9A7B55">FINDING</text>
+  <text x="488" y="180" font-size="21" font-weight="700" fill="#1F2A33">41% open rate in Q3</text>
+  <text x="488" y="204" font-size="14" fill="#C2603A" font-weight="600">reported by Anna · scope Q3</text>
+  <text x="488" y="324" font-size="12" font-weight="700" letter-spacing="1.5" fill="#9A7B55">FINDING</text>
+  <text x="488" y="352" font-size="21" font-weight="700" fill="#1F2A33">37.8% for July–August</text>
+  <text x="488" y="376" font-size="14" fill="#2A7A76" font-weight="600">observed in the export · lines 1–5</text>
+
+  <!-- draft -->
+  <text x="868" y="126" font-size="12" font-weight="700" letter-spacing="1.5" fill="#1F3A5F">DRAFT FOR THE BOARD</text>
+  <rect x="1060" y="110" width="68" height="22" rx="11" fill="#E9EEF5"/>
+  <text x="1094" y="126" font-size="12" font-weight="700" fill="#1F3A5F" text-anchor="middle">unsent</text>
+  <g font-size="17" fill="#1F2A33">
+    <text x="868" y="172">Anna gives an open rate of</text>
+    <text x="868" y="198"><tspan font-weight="700" fill="#C2603A">41%</tspan> for the quarter.</text>
+    <text x="868" y="236">The July–August export</text>
+    <text x="868" y="262">shows <tspan font-weight="700" fill="#2A7A76">37.8%</tspan>.</text>
+    <text x="868" y="300">September is not in</text>
+    <text x="868" y="326">the export yet.</text>
+  </g>
+  <path d="M868 356h260" stroke="#E2D6C0" stroke-width="1.5"/>
+  <text x="868" y="384" font-size="13" fill="#6E6558">Each figure names its source.</text>
+  <text x="868" y="402" font-size="13" fill="#6E6558">You decide when it goes out.</text>
+
+  <!-- arrows -->
+  <g fill="none" stroke-width="2.5">
+    <path d="M382 165C420 165 424 165 458 165" stroke="#C2603A" marker-end="url(#aR)"/>
+    <path d="M382 337C420 337 424 337 458 337" stroke="#2A7A76" marker-end="url(#aT)"/>
+    <path d="M758 165C800 165 800 200 834 200" stroke="#1F3A5F" marker-end="url(#aN)"/>
+    <path d="M758 337C800 337 800 300 834 300" stroke="#1F3A5F" marker-end="url(#aN)"/>
+  </g>
+</svg>

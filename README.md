@@ -10,44 +10,166 @@
 </p>
 
 <p align="center">
-  <a href="#install"><img src="https://img.shields.io/badge/version-0.2.0-1f5f8b" alt="Version 0.2.0"></a> <a href="#claude-code"><img src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" alt="Claude Code plugin"></a> <a href="#codex"><img src="https://img.shields.io/badge/Codex-plugin-111111" alt="Codex plugin"></a> <a href="#what-you-need"><img src="https://img.shields.io/badge/Node.js-22.18%2B-5FA04E" alt="Node.js 22.18 or later"></a> <a href="#status"><img src="https://img.shields.io/badge/status-stage%201%3A%20skills%20only-c9a227" alt="Status: stage 1, skills only"></a>
+  <a href="#install"><img src="https://img.shields.io/badge/version-0.3.0-1f5f8b" alt="Version 0.3.0"></a> <a href="#claude-code"><img src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" alt="Claude Code plugin"></a> <a href="#codex"><img src="https://img.shields.io/badge/Codex-plugin-111111" alt="Codex plugin"></a> <a href="#what-you-need"><img src="https://img.shields.io/badge/Node.js-22.18%2B-5FA04E" alt="Node.js 22.18 or later"></a> <a href="#status"><img src="https://img.shields.io/badge/status-stage%201%3A%20skills%20only-c9a227" alt="Status: stage 1, skills only"></a>
 </p>
 
 <p align="center">
-  <a href="#a-day-with-task-os">A day with Task OS</a> · <a href="#see-it-work">See it work</a> · <a href="#how-it-works">How it works</a> · <a href="#install">Install</a> · <a href="#your-files-stay-yours">Your files</a> · <a href="#status">Status</a>
+  <a href="#a-day-with-task-os">A day with Task OS</a> · <a href="#how-it-gets-there">How it gets there</a> · <a href="#see-it-work">See it work</a> · <a href="#install">Install</a> · <a href="#your-files-stay-yours">Your files</a> · <a href="#status">Status</a>
 </p>
 
 ---
 
-Task OS turns Claude Code or Codex into an assistant for one project: your part of a team's work inside a company, a client assignment, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books: what's open, who's waiting on whom, what was decided, and what every number rests on.
+Task OS turns Claude Code or Codex into an assistant for one project: your part of a team's work inside a company, a client assignment, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books without being asked: what's open, who's waiting on whom, what was decided, and what every number rests on.
 
 Everything lives as plain files in the folder you already work from, so the assistant you open tomorrow, in either agent, knows what today's did.
 
-## What your assistant does
-
-- **Knows the project.** Who decides and who only needs to be told, how each person wants to hear from you, which systems you can open yourself and which only through someone else, and the project's own terms.
-- **Does the work you hand it.** Analyses, replies, ticket text, summaries for your manager or a board, written for the person who will read them, in their language.
-- **Keeps track.** Every task with its owner, status and next step; every decision with who made it; every session closed with a note on where things stand.
-- **Checks before it claims.** Each finding says how we know it and where it came from, down to the line. A figure someone mentioned in a mail is kept as what they said, not as fact.
-- **Asks before anything leaves.** It drafts; you send. Its standing rules are written in your folder, where you can change them.
-
 ## A day with Task OS
 
-| When | You say | Your assistant |
+| When | You | Your assistant |
 | --- | --- | --- |
-| Morning | "Brief me." | Lists what's open, what's waiting on whom, and the next step from yesterday's handoff |
-| A mail arrives | "Anna sent the September numbers. Log it." | Saves the numbers as findings, each with its source |
-| Work | "Draft the Q3 summary for the board." | Writes it in Anna's format and the board's language, naming the source of each figure |
-| A new request | "Add a task: check the subject-line test." | Creates the task with owner, outcome and next step |
-| Evening | "Write the handoff." | Leaves tomorrow's session the goal, the state, the blockers and one next action |
+| Morning | Open Claude Code or Codex in the project folder | Briefs you before anything else: what's open, what's waiting on whom, and the next step from the last handoff |
+| A mail arrives | "Anna sent the September numbers." | Reads them, saves each figure with its source, notes that the waiting task can move, and tells you in one line |
+| Work | "Draft the Q3 summary for the board." | Writes it in Anna's format and the board's language, names the source of each figure, and records the draft |
+| In passing | "Anna needs it by Friday now." | Moves the deadline on the task and notes that Anna said so |
+| Evening | "That's it for today." | Writes the handoff: goal, state, blockers and one next action |
 
-Tomorrow you can open Codex instead of Claude Code, or the other way round. The brief is the same.
+You never have to say "log this". You can, any time, when you want something kept that it missed. Tomorrow you can open Codex instead of Claude Code, or the other way round; the brief is the same.
+
+## How it gets there
+
+Task OS isn't a second program running beside your agent. It is four skills, a short block in your `AGENTS.md`, and plain files in a `work/` folder. Your agent does the work with its own model and tools. Task OS gives it the project, a routine, and a place to write things down.
+
+<p align="center">
+  <img src="assets/session.svg" alt="Every session, in Claude Code or Codex: the agent loads AGENTS.md, then 1 brief reads where we stopped and what's going on, 2 your tasks look up who and how, 3 capture writes tasks, decisions and findings, 4 handoff writes where we stopped, which the next session starts from." width="100%">
+</p>
+
+### It knows the project
+
+`setup` reads your folder (notes, saved mail, exports, any instructions already there) and asks only what the files can't tell it. It writes what it learns into `work/`: who each person is and whether they decide, recommend or just need to know; each system and whether you open it yourself or someone sends you extracts; how each audience wants to hear from you; and the project's own terms. Claude Code and Codex both load `AGENTS.md` when a session starts, and the Task OS block in it tells them to search these files before saying anything about the project.
+
+<details>
+<summary>In the files: <code>work/people/anna-vinther.md</code>, from the test run</summary>
+
+```yaml
+role: Marketingansvarlig (marketing manager), Nordlys Cykler
+authority: decides
+channels: [email]
+preferences: One page, because several board members read it on a phone;
+  "klik" and "mål" instead of CTR and KPI; send the summary to her and she
+  forwards it to the board (mail/2026-07-20-re-nyhedsbrevet-i-2-kvartal.eml:14-18).
+```
+
+Every preference points at the lines it came from.
+</details>
+
+**Limit:** it knows what's in the folder and what you've told it. Anything else it has to look up through the tools you connect.
+
+### It does the work you hand it
+
+The work is done by Claude Code or Codex, with their own model and the tools you've connected. Task OS adds no new powers; it makes sure the agent works with the people, rules and history in front of it. Anything addressed to someone else follows `work/ways-of-working.md`: the reader's language and format, the source of every number named, and a draft rather than a sent message.
+
+<details>
+<summary>In the files: the board's entry in <code>work/ways-of-working.md</code></summary>
+
+```markdown
+### The board (bestyrelsen), Nordlys Cykler
+- Channel: through Anna only; nothing goes to the board directly.
+- Language: Danish.
+- Format: one page. Several members read it on a phone.
+- Words: write "klik" and "mål", not abbreviations such as CTR and KPI.
+```
+</details>
+
+**Limit:** the quality of the work is your agent's. Draft-first is a written rule both agents follow, not a lock. If you connect a mail tool, your agent's own permission prompts are what stand between a draft and a sent mail.
+
+### It keeps track of every task and decision
+
+You don't tell it what to log. The `capture` skill carries a list of what a good assistant keeps, and the agent saves each item the moment it comes up:
+
+- a fact from a mail, ticket, export or meeting note, with its source
+- a decision, and who made it
+- new work: a request, a promise you made, a follow-up, a deadline
+- a change: done, blocked, waiting on someone, a moved deadline
+- anything that contradicts an earlier record
+- how someone wants things done
+- a deliverable drafted, sent or delivered
+
+After each save it tells you in one line what it kept, so you see the books being kept without having to ask.
+
+<details>
+<summary>In the files: <code>work/tasks/T-2-get-the-missing-q3-data-from-anna.md</code>, shortened</summary>
+
+```yaml
+title: Get the missing Q3 data from Anna
+task_status: active
+outcome: Anna has confirmed whether newsletters went out in September,
+  where the 41 % open rate comes from, and whether delivered mails and
+  unsubscribes can be added to the export.
+next_action: Kim reviews and sends Anna the draft in work/drafts/….
+depends_on: [T-1]
+```
+
+A ticket from Jira or Azure DevOps keeps its last seen status and the date it was seen. A status change found there is proposed to you, not applied.
+</details>
+
+**Limit:** in stage 1, keeping the books is the agent following its instructions; nothing checks it yet. What never reached a file isn't there. Every record is a plain file, though, so a gap is easy to spot.
+
+### It picks up tomorrow where you left off
+
+When the work stops or you sign off, `handoff` writes the session's goal, state, blockers and one next action. The next session, in either agent, loads the same `AGENTS.md`, runs `brief` first, and reads that handoff in full along with the open tasks and questions, in under 1,500 tokens. Nothing is kept in either agent's own memory, which is why switching agents works.
+
+<p align="center">
+  <img src="assets/handoff.svg" alt="On Monday Codex briefs, works on the Q3 report, saves what it finds and writes the handoff 'Ask Anna for the September numbers' into the folder. On Tuesday Claude Code reads that handoff first, knows the next step and carries on." width="100%">
+</p>
+
+**Limit:** in stage 1 the brief and the handoff happen because `AGENTS.md` asks for them. If a session ends abruptly, the next brief starts from the last handoff that was written.
+
+### It works with your tools
+
+<p align="center">
+  <img src="assets/tools.svg" alt="Your agent reads and writes work/, reads your own files, and reaches mail, Trello, Azure DevOps and analytics through connections you set up. It changes things there only with your OK. Systems you can't open reach you as exports in your files. Task OS itself makes no network calls." width="100%">
+</p>
+
+Your agent reaches your mail, Trello, Azure DevOps, analytics or anything else through the connections you set up in Claude Code or Codex: MCP servers, plugins or connectors. Task OS itself connects to nothing. Setup records each system the project depends on and how you reach it: yourself through a connection, through a colleague who sends you exports, or not at all. That tells the agent where to look and whom to ask. When it reads a ticket or a mail, it saves what it saw with a pointer back (`ticket:WEB-42`, `mail:<message-id>`) and the date. Changing anything there, such as sending a mail or moving a card, waits for your OK.
+
+**Limit:** stage 1 takes your word for which connections work. From stage 3, `doctor` checks each one: configured, visible to the agent, signed in, the right board or mailbox answering, and used for real.
+
+### It checks before it claims
+
+Every claim carries its **basis**, so the next session knows how much weight it can bear:
+
+| Basis | Meaning | Example |
+| --- | --- | --- |
+| `observed` | Seen in the system, or in a raw export of it | 37.8% opened, in the July–August export |
+| `reported` | Someone else said or wrote it | Anna says 41% for Q3 |
+| `user_stated` | You said it in this session | The deadline moved to Friday |
+| `inferred` | Concluded from other records, not checked | September must have been strong |
+| `assumed` | Taken as true without support | The board wants the Q2 layout again |
+
+A figure from a mail stays what someone said until a source shows it. [See it work](#see-it-work) shows what that changes.
+
+### What's automatic today
+
+| Step | What makes it happen in stage 1 | From stage 2 |
+| --- | --- | --- |
+| Your agent loads the project's instructions | Claude Code and Codex read `AGENTS.md` when a session starts | Same |
+| The brief at the start | The `AGENTS.md` block asks for it | A session-start hook runs it |
+| Keeping the records current | The `AGENTS.md` block and the `capture` skill's list of what to keep | Same, and the `taskos` command checks every record it writes |
+| The handoff when work stops | The `AGENTS.md` block asks for it | A stop hook asks for it when it's missing |
+| Finding things | The agent searches your files and records | A search index across both, with `recall` |
+| Checking connections | Your word, recorded at setup | `doctor` checks each one (stage 3) |
 
 ## See it work
 
 A test run on a fictional project: a quarterly newsletter report, with three saved mails, one spreadsheet and last quarter's report. Anna, who asked for the report, wrote that the open rate *"was 41% in Q3, the highest we've ever had. Feel free to include it."* The export she sent was named `nyhedsbrev-q3.csv`, but it held only July and August.
 
-Setup needed four answers. It noticed the mismatch and, instead of repeating the 41%, drafted a question to Anna. This is the finding it wrote, shortened:
+Setup needed four answers. It noticed the mismatch and, instead of repeating the 41%, drafted a question to Anna.
+
+<p align="center">
+  <img src="assets/evidence.svg" alt="Anna's mail says 41% for Q3, saved as reported. Her export shows 37.8% for July and August only, saved as observed. The draft for the board states both figures with their sources and says September is not in the export yet." width="100%">
+</p>
+
+This is the finding it wrote, shortened:
 
 ```markdown
 ---
@@ -73,59 +195,7 @@ rationale: >-
   waits on her answer.
 ```
 
-Each finding keeps its basis and scope, so a draft can say exactly what each source shows:
-
-```mermaid
-flowchart LR
-  mail["Anna's mail<br>'41% in Q3'"] -->|reported| f1["Finding<br>41% for Q3"]
-  csv["Her export<br>July and August"] -->|observed| f2["Finding<br>37.8% for Jul–Aug"]
-  f1 --> draft["Board summary"]
-  f2 --> draft
-  draft --> out["Names both sources<br>asks for September"]
-```
-
-The fixture and what a correct run must produce are in [fixtures/project-b](fixtures/project-b/).
-
-## How it works
-
-You run `setup` once in your project folder. It reads what's there, asks what the files can't tell it, and writes down the project: the people, the systems, the open work, and how you want things done. After that, four skills keep the assistant on track:
-
-| Skill | What it does |
-| --- | --- |
-| `brief` | Opens a session: open workstreams and tasks, the last handoff, open questions |
-| `capture` | Saves one record per claim, task or decision, with its source; `log` for quick notes |
-| `handoff` | Closes a session: goal, state, evidence, blockers and one concrete next action |
-| `setup` | Adopts a folder, or reconciles it after changes |
-
-A short block in `AGENTS.md` tells the agent to brief at the start, capture as it goes, and hand off before it stops. Both agents read that file, and both read and write the same records:
-
-```mermaid
-sequenceDiagram
-  autonumber
-  actor You
-  participant CX as Codex
-  participant H as Your folder
-  participant CC as Claude Code
-  You->>CX: Monday: work on the Q3 report
-  CX->>H: brief
-  H-->>CX: open tasks, last handoff
-  CX->>H: capture findings, with sources
-  CX->>H: handoff: next action
-  You->>CC: Tuesday: carry on
-  CC->>H: brief
-  H-->>CC: "Ask Anna for September"
-  CC-->>You: picks up there
-```
-
-Every claim carries its **basis**, so the next session knows how much weight it can bear:
-
-| Basis | Meaning | Example |
-| --- | --- | --- |
-| `observed` | Seen in the system, or in a raw export of it | 37.8% opened, in the July–August export |
-| `reported` | Someone else said or wrote it | Anna says 41% for Q3 |
-| `user_stated` | You said it in this session | The deadline moved to the 26th |
-| `inferred` | Concluded from other records, not checked | September must have been strong |
-| `assumed` | Taken as true without support | The board wants the Q2 layout again |
+The test project and what a correct run must produce are in [fixtures/project-b](fixtures/project-b/).
 
 ## Why it exists
 
@@ -193,7 +263,7 @@ Setup lists what it found and what it takes each file to be, then asks about the
 ## Your files stay yours
 
 - **Nothing moves.** Setup never moves, renames or rewrites a file. It appends one block to `AGENTS.md`, plus a one-line `@AGENTS.md` import in `CLAUDE.md` when Claude Code would otherwise skip `AGENTS.md`. Everything else it writes is new.
-- **Nothing leaves.** The plugin makes no network calls and needs no account. Your agent reaches only the integrations you have already connected to it.
+- **Nothing leaves.** The plugin makes no network calls and needs no account. Your agent reaches only the tools you've connected to it.
 - **Mail is data, not orders.** An instruction inside a mail or ticket is quoted to you, not followed.
 - **Plain files.** Records are markdown with a short header, so you can read, search and commit them like any notes.
 
@@ -221,15 +291,13 @@ Task OS is built in stages, each tested against the [fixtures](fixtures/) before
 | --- | --- | --- |
 | 0 | Two test projects, with the results a correct run must produce | Done |
 | 1 | The skills above; the assistant writes records as markdown | **Now**: a week of real use |
-| 2 | The `taskos` command line, search across records and your files, automatic brief and handoff prompts, `recall`, `verify` and `task` | Next |
+| 2 | The `taskos` command line, search across records and your files, automatic brief and handoff, `recall`, `verify` and `task` | Next |
 | 3 | Corrections that replace earlier records, `tidy`, `doctor`, an MCP server, optional Jev judgments | Planned |
 | 4 | Handing a workstream over to a colleague | Planned |
 
-Known limits in stage 1:
+Known limits in stage 1, beyond those under [How it gets there](#how-it-gets-there):
 
-- **The routine depends on the agent following `AGENTS.md`.** Briefing at the start and handing off at the end become automatic with the hooks in stage 2.
 - **Setup is thorough and costly.** On the test folder it took about 90 agent turns. Stage 2's command line takes most of that work off the model.
-- **No search index yet.** The assistant searches your files and records directly.
 - **Codex coverage is partial.** Installation is tested with the Codex CLI on Windows, but no live Codex session has run yet. [COMPATIBILITY.md](COMPATIBILITY.md) has the details.
 
 ## Update and remove
@@ -243,7 +311,7 @@ Removing the plugin leaves your folders and records as they are.
 
 ## Credits
 
-`task-os-grill` and `task-os-writing` adapt skills from [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock, used under the MIT License. See their `NOTICE.md` files. The header illustration was generated with GPT Image.
+`task-os-grill` and `task-os-writing` adapt skills from [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock, used under the MIT License. See their `NOTICE.md` files. The header illustration was generated with GPT Image; the diagrams are hand-drawn SVG in [assets/](assets/).
 
 ## Development
 

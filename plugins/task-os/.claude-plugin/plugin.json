@@ -1,7 +1,7 @@
 {
   "name": "task-os",
   "displayName": "Task OS",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Project workspace, memory and way of work",
   "author": { "name": "ossianravn" },
   "repository": "https://github.com/ossianravn/task-os-agent-plugin"
