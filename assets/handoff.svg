@@ -34,7 +34,7 @@
     <g font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle"><text x="846" y="201">1</text><text x="846" y="249">2</text><text x="846" y="297">3</text><text x="846" y="345">4</text></g>
     <text x="870" y="201" font-weight="700" fill="#C2603A">Reads Monday's handoff first</text>
     <text x="870" y="249">Knows the next step</text>
-    <text x="870" y="297">Carries on; you retell nothing</text>
+    <text x="870" y="297">Carries on where Monday stopped</text>
     <text x="870" y="345">Adds today's work to the files</text>
   </g>
 

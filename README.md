@@ -19,7 +19,7 @@
 
 ---
 
-Task OS turns Claude Code or Codex into an assistant for one project: your part of a team's work inside a company, a client assignment, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books without being asked: what's open, who's waiting on whom, what was decided, and what every number rests on.
+Task OS turns Claude Code or Codex into an assistant for one project: your part of a team's work inside a company, a client assignment, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books on its own: what's open, who's waiting on whom, what was decided, and what every number rests on.
 
 Everything lives as plain files in the folder you already work from, so the assistant you open tomorrow, in either agent, knows what today's did.
 
@@ -33,11 +33,11 @@ Everything lives as plain files in the folder you already work from, so the assi
 | In passing | "Anna needs it by Friday now." | Moves the deadline on the task and notes that Anna said so |
 | Evening | "That's it for today." | Writes the handoff: goal, state, blockers and one next action |
 
-You never have to say "log this". You can, any time, when you want something kept that it missed. Tomorrow you can open Codex instead of Claude Code, or the other way round; the brief is the same.
+It keeps the books as it goes, and you can still say "log this" whenever you want something kept. Tomorrow you can open Codex instead of Claude Code, or the other way round; the brief is the same.
 
 ## How it gets there
 
-Task OS isn't a second program running beside your agent. It is four skills, a short block in your `AGENTS.md`, and plain files in a `work/` folder. Your agent does the work with its own model and tools. Task OS gives it the project, a routine, and a place to write things down.
+Task OS is four skills, a short block in your `AGENTS.md`, and plain files in a `work/` folder. Your agent does the work with its own model and tools. Task OS gives it the project, a routine, and a place to write things down.
 
 <p align="center">
   <img src="assets/session.svg" alt="Every session, in Claude Code or Codex: the agent loads AGENTS.md, then 1 brief reads where we stopped and what's going on, 2 your tasks look up who and how, 3 capture writes tasks, decisions and findings, 4 handoff writes where we stopped, which the next session starts from." width="100%">
@@ -45,7 +45,7 @@ Task OS isn't a second program running beside your agent. It is four skills, a s
 
 ### It knows the project
 
-`setup` reads your folder (notes, saved mail, exports, any instructions already there) and asks only what the files can't tell it. It writes what it learns into `work/`: who each person is and whether they decide, recommend or just need to know; each system and whether you open it yourself or someone sends you extracts; how each audience wants to hear from you; and the project's own terms. Claude Code and Codex both load `AGENTS.md` when a session starts, and the Task OS block in it tells them to search these files before saying anything about the project.
+`setup` reads your folder (notes, saved mail, exports, any instructions already there) and asks you about the gaps the files leave. It writes what it learns into `work/`: who each person is and whether they decide, recommend or just need to know; each system and whether you open it yourself or someone sends you extracts; how each audience wants to hear from you; and the project's own terms. Claude Code and Codex both load `AGENTS.md` when a session starts, and the Task OS block in it tells them to search these files before saying anything about the project.
 
 <details>
 <summary>In the files: <code>work/people/anna-vinther.md</code>, from the test run</summary>
@@ -66,7 +66,7 @@ Every preference points at the lines it came from.
 
 ### It does the work you hand it
 
-The work is done by Claude Code or Codex, with their own model and the tools you've connected. Task OS adds no new powers; it makes sure the agent works with the people, rules and history in front of it. Anything addressed to someone else follows `work/ways-of-working.md`: the reader's language and format, the source of every number named, and a draft rather than a sent message.
+The work is done by Claude Code or Codex, with their own model and the tools you've connected. Task OS gives it the people, rules and history to work with. Anything addressed to someone else follows `work/ways-of-working.md`: the reader's language and format, the source of every number named, and a draft rather than a sent message.
 
 <details>
 <summary>In the files: the board's entry in <code>work/ways-of-working.md</code></summary>
@@ -80,11 +80,11 @@ The work is done by Claude Code or Codex, with their own model and the tools you
 ```
 </details>
 
-**Limit:** the quality of the work is your agent's. Draft-first is a written rule both agents follow, not a lock. If you connect a mail tool, your agent's own permission prompts are what stand between a draft and a sent mail.
+**Limit:** the quality of the work is your agent's. Draft-first is a written rule both agents follow. If you connect a mail tool, your agent's own permission prompts are what stand between a draft and a sent mail.
 
 ### It keeps track of every task and decision
 
-You don't tell it what to log. The `capture` skill carries a list of what a good assistant keeps, and the agent saves each item the moment it comes up:
+The `capture` skill carries a list of what a good assistant keeps, and the agent saves each item the moment it comes up:
 
 - a fact from a mail, ticket, export or meeting note, with its source
 - a decision, and who made it
@@ -94,7 +94,7 @@ You don't tell it what to log. The `capture` skill carries a list of what a good
 - how someone wants things done
 - a deliverable drafted, sent or delivered
 
-After each save it tells you in one line what it kept, so you see the books being kept without having to ask.
+After each save it tells you in one line what it kept, so you can watch the books being kept.
 
 <details>
 <summary>In the files: <code>work/tasks/T-2-get-the-missing-q3-data-from-anna.md</code>, shortened</summary>
@@ -109,14 +109,14 @@ next_action: Kim reviews and sends Anna the draft in work/drafts/….
 depends_on: [T-1]
 ```
 
-A ticket from Jira or Azure DevOps keeps its last seen status and the date it was seen. A status change found there is proposed to you, not applied.
+A ticket from Jira or Azure DevOps keeps its last seen status and the date it was seen. A status change found there comes to you as a proposal.
 </details>
 
-**Limit:** in stage 1, keeping the books is the agent following its instructions; nothing checks it yet. What never reached a file isn't there. Every record is a plain file, though, so a gap is easy to spot.
+**Limit:** in stage 1, keeping the books rests on the agent following its instructions; stage 2 adds checks. The records hold what reached a file, and every record is a plain file you can read, so a gap is easy to spot.
 
 ### It picks up tomorrow where you left off
 
-When the work stops or you sign off, `handoff` writes the session's goal, state, blockers and one next action. The next session, in either agent, loads the same `AGENTS.md`, runs `brief` first, and reads that handoff in full along with the open tasks and questions, in under 1,500 tokens. Nothing is kept in either agent's own memory, which is why switching agents works.
+When the work stops or you sign off, `handoff` writes the session's goal, state, blockers and one next action. The next session, in either agent, loads the same `AGENTS.md`, runs `brief` first, and reads that handoff in full along with the open tasks and questions, in under 1,500 tokens. Everything lives in your folder, which is why switching agents works.
 
 <p align="center">
   <img src="assets/handoff.svg" alt="On Monday Codex briefs, works on the Q3 report, saves what it finds and writes the handoff 'Ask Anna for the September numbers' into the folder. On Tuesday Claude Code reads that handoff first, knows the next step and carries on." width="100%">
@@ -127,10 +127,10 @@ When the work stops or you sign off, `handoff` writes the session's goal, state,
 ### It works with your tools
 
 <p align="center">
-  <img src="assets/tools.svg" alt="Your agent reads and writes work/, reads your own files, and reaches mail, Trello, Azure DevOps and analytics through connections you set up. It changes things there only with your OK. Systems you can't open reach you as exports in your files. Task OS itself makes no network calls." width="100%">
+  <img src="assets/tools.svg" alt="Your agent reads and writes work/, reads your own files, and reaches mail, Trello, Azure DevOps and analytics through connections you set up. It changes things there only with your OK. Systems you reach through others arrive as exports in your files. Task OS itself works only with the files in your folder." width="100%">
 </p>
 
-Your agent reaches your mail, Trello, Azure DevOps, analytics or anything else through the connections you set up in Claude Code or Codex: MCP servers, plugins or connectors. Task OS itself connects to nothing. Setup records each system the project depends on and how you reach it: yourself through a connection, through a colleague who sends you exports, or not at all. That tells the agent where to look and whom to ask. When it reads a ticket or a mail, it saves what it saw with a pointer back (`ticket:WEB-42`, `mail:<message-id>`) and the date. Changing anything there, such as sending a mail or moving a card, waits for your OK.
+Your agent reaches your mail, Trello, Azure DevOps, analytics or anything else through the connections you set up in Claude Code or Codex: MCP servers, plugins or connectors. Task OS itself works only with the files in your folder. Setup records each system the project depends on and how you reach it: yourself through a connection, through a colleague who sends you exports, or out of reach. That tells the agent where to look and whom to ask. When it reads a ticket or a mail, it saves what it saw with a pointer back (`ticket:WEB-42`, `mail:<message-id>`) and the date. Changing anything there, such as sending a mail or moving a card, waits for your OK.
 
 **Limit:** stage 1 takes your word for which connections work. From stage 3, `doctor` checks each one: configured, visible to the agent, signed in, the right board or mailbox answering, and used for real.
 
@@ -143,8 +143,8 @@ Every claim carries its **basis**, so the next session knows how much weight it 
 | `observed` | Seen in the system, or in a raw export of it | 37.8% opened, in the July–August export |
 | `reported` | Someone else said or wrote it | Anna says 41% for Q3 |
 | `user_stated` | You said it in this session | The deadline moved to Friday |
-| `inferred` | Concluded from other records, not checked | September must have been strong |
-| `assumed` | Taken as true without support | The board wants the Q2 layout again |
+| `inferred` | Concluded from other records, awaiting a check | September must have been strong |
+| `assumed` | Taken as true on trust | The board wants the Q2 layout again |
 
 A figure from a mail stays what someone said until a source shows it. [See it work](#see-it-work) shows what that changes.
 
@@ -166,7 +166,7 @@ A test run on a fictional project: a quarterly newsletter report, with three sav
 Setup needed four answers. It noticed the mismatch and, instead of repeating the 41%, drafted a question to Anna.
 
 <p align="center">
-  <img src="assets/evidence.svg" alt="Anna's mail says 41% for Q3, saved as reported. Her export shows 37.8% for July and August only, saved as observed. The draft for the board states both figures with their sources and says September is not in the export yet." width="100%">
+  <img src="assets/evidence.svg" alt="Anna's mail says 41% for Q3, saved as reported. Her export shows 37.8% for July and August only, saved as observed. The draft for the board states both figures with their sources and says September is still to come from Anna." width="100%">
 </p>
 
 This is the finding it wrote, shortened:
@@ -201,7 +201,7 @@ The test project and what a correct run must produce are in [fixtures/project-b]
 
 Task OS grew out of real consulting work run this way: a project folder, an `AGENTS.md` with house rules, a project log and a handoff file, with Claude doing the legwork. It worked. It was also fragile. The log kept growing, and every session had to reread it. The house rules lived in that one folder and would have to be written again for the next project. And once, a number read from the wrong column of a log reached the client before anyone checked it against the source that could settle it.
 
-Task OS keeps what worked and gives it structure: a record for each claim, task and decision, the evidence attached, and a brief instead of a long reread. Nothing in it is specific to consulting; the same setup works for your own tasks inside a company or a team.
+Task OS keeps what worked and gives it structure: a record for each claim, task and decision, the evidence attached, and a brief instead of a long reread. The same setup works for your own tasks inside a company, for a team, or for clients.
 
 ## Install
 
@@ -209,7 +209,7 @@ Task OS keeps what worked and gives it structure: a record for each claim, task 
 
 - Claude Code 2.1.277 or later, or the Codex CLI. [COMPATIBILITY.md](COMPATIBILITY.md) lists the tested versions.
 - Node.js 22.18 or later on your `PATH`. The skills run a small bundled script to mint record ids.
-- Nothing else: no account, API key or server.
+- That is all. Task OS runs on the files in your folder.
 
 ### Claude Code
 
@@ -262,9 +262,9 @@ Setup lists what it found and what it takes each file to be, then asks about the
 
 ## Your files stay yours
 
-- **Nothing moves.** Setup never moves, renames or rewrites a file. It appends one block to `AGENTS.md`, plus a one-line `@AGENTS.md` import in `CLAUDE.md` when Claude Code would otherwise skip `AGENTS.md`. Everything else it writes is new.
-- **Nothing leaves.** The plugin makes no network calls and needs no account. Your agent reaches only the tools you've connected to it.
-- **Mail is data, not orders.** An instruction inside a mail or ticket is quoted to you, not followed.
+- **Your files stay put.** Setup keeps every existing file where it is, byte for byte. It appends one block to `AGENTS.md`, plus a one-line `@AGENTS.md` import in `CLAUDE.md` when Claude Code needs it to read `AGENTS.md`. Everything else it writes is new.
+- **Everything stays local.** The plugin works with the files in your folder, on your machine. Your agent reaches the tools you've connected to it, and only those.
+- **Mail is data.** An instruction inside a mail or ticket is quoted to you, and you decide what happens.
 - **Plain files.** Records are markdown with a short header, so you can read, search and commit them like any notes.
 
 ```text
@@ -298,7 +298,7 @@ Task OS is built in stages, each tested against the [fixtures](fixtures/) before
 Known limits in stage 1, beyond those under [How it gets there](#how-it-gets-there):
 
 - **Setup is thorough and costly.** On the test folder it took about 90 agent turns. Stage 2's command line takes most of that work off the model.
-- **Codex coverage is partial.** Installation is tested with the Codex CLI on Windows, but no live Codex session has run yet. [COMPATIBILITY.md](COMPATIBILITY.md) has the details.
+- **Codex coverage is partial.** Installation is tested with the Codex CLI on Windows; the first live Codex session is still ahead. [COMPATIBILITY.md](COMPATIBILITY.md) has the details.
 
 ## Update and remove
 

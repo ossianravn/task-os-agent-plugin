@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 450" width="1200" height="450" role="img" aria-labelledby="t d" font-family="'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif">
   <title id="t">Two sources, two findings</title>
-  <desc id="d">Anna's mail says 41 percent for Q3, recorded as reported. Her export shows 37.8 percent for July and August, recorded as observed. The draft for the board states both, names each source, and says September is not in the export yet.</desc>
+  <desc id="d">Anna's mail says 41 percent for Q3, recorded as reported. Her export shows 37.8 percent for July and August, recorded as observed. The draft for the board states both, names each source, and says September is still to come from Anna.</desc>
   <defs>
     <marker id="aN" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#1F3A5F"/></marker>
     <marker id="aT" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#2A7A76"/></marker>
@@ -54,8 +54,8 @@
     <text x="868" y="198"><tspan font-weight="700" fill="#C2603A">41%</tspan> for the quarter.</text>
     <text x="868" y="236">The July–August export</text>
     <text x="868" y="262">shows <tspan font-weight="700" fill="#2A7A76">37.8%</tspan>.</text>
-    <text x="868" y="300">September is not in</text>
-    <text x="868" y="326">the export yet.</text>
+    <text x="868" y="300">September is still to</text>
+    <text x="868" y="326">come from Anna.</text>
   </g>
   <path d="M868 356h260" stroke="#E2D6C0" stroke-width="1.5"/>
   <text x="868" y="384" font-size="13" fill="#6E6558">Each figure names its source.</text>

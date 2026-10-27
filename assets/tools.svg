@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-labelledby="t d" font-family="'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif">
   <title id="t">What your agent can reach</title>
-  <desc id="d">Your agent reads and writes the Task OS records in work/, reads your own files, and reaches mail, Trello, Azure DevOps and analytics only through connections you set up in Claude Code or Codex. It changes things there only with your OK. Systems you cannot open reach you as exports in your files.</desc>
+  <desc id="d">Your agent reads and writes the Task OS records in work/, reads your own files, and reaches mail, Trello, Azure DevOps and analytics only through connections you set up in Claude Code or Codex. It changes things there only with your OK. Systems you reach through others arrive as exports in your files.</desc>
   <defs>
     <marker id="aN" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1F3A5F"/></marker>
     <marker id="aT" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7A76"/></marker>
@@ -30,13 +30,13 @@
     <text x="108" y="340" font-size="22" font-weight="700">Your files</text>
     <text x="108" y="368" font-size="15" fill="#3F4A54">notes, saved mail,</text>
     <text x="108" y="389" font-size="15" fill="#3F4A54">exports, deliveries</text>
-    <text x="108" y="418" font-size="13" font-weight="600" fill="#9A6F14">read, never changed</text>
+    <text x="108" y="418" font-size="13" font-weight="600" fill="#9A6F14">read as sources</text>
   </g>
 
   <!-- systems you cannot open -->
   <rect x="48" y="500" width="312" height="66" rx="16" fill="#F6F2EA" stroke="#B9AE9B" stroke-width="2" stroke-dasharray="6 6"/>
-  <text x="72" y="528" font-size="16" font-weight="700" fill="#5D554A">Systems you can't open</text>
-  <text x="72" y="551" font-size="14" fill="#7A7164">someone sends you an export</text>
+  <text x="72" y="528" font-size="16" font-weight="700" fill="#5D554A">Reached through others</text>
+  <text x="72" y="551" font-size="14" fill="#7A7164">someone sends you exports</text>
   <path d="M300 498V466" stroke="#9C9384" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#aG)"/>
   <text x="252" y="486" font-size="13" font-weight="600" fill="#7A7164" text-anchor="end">by mail</text>
 
@@ -101,7 +101,7 @@
   <g transform="translate(840 500)">
     <path d="M14 2 26 7v10c0 8-5 13-12 16C7 30 2 25 2 17V7z" fill="#E6F2F0" stroke="#2A7A76" stroke-width="2.5" stroke-linejoin="round"/>
     <path d="M8 17l4 4 8-9" fill="none" stroke="#2A7A76" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="40" y="16" font-size="14" font-weight="700" fill="#1F2A33">Task OS makes no network calls.</text>
+    <text x="40" y="16" font-size="14" font-weight="700" fill="#1F2A33">Task OS works only with your files.</text>
     <text x="40" y="37" font-size="14" fill="#3F4A54">work/systems/ records how you reach</text>
     <text x="40" y="57" font-size="14" fill="#3F4A54">each system, and who to ask.</text>
   </g>
