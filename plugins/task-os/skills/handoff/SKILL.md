@@ -20,4 +20,5 @@ Leave the next session, in either host, enough to continue without the user rest
    - `next_action`: the one next step, concrete enough to start without asking.
    - `rationale`: why that step comes next.
 5. When `work/ways-of-working.md` records that the user also wants a session entry in the legacy log, append a dated entry to the mapped legacy log as well.
-6. Reply with the handoff's path and its next action.
+6. When the Pele Board's `show_diagram` tool is available, draw `taskos-plan` and `taskos-tasks` again from the new handoff, as [the project board reference](../../references/project-board.md) says.
+7. Reply with the handoff's path and its next action.

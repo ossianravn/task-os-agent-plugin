@@ -42,6 +42,7 @@ Leave out small talk, your own intermediate steps, and guesses nobody relies on.
 6. Update the documents that the new records affect:
    - A decision updates the `state` of its workstream.
    - A change the user reports goes straight into the task.
+   - When a task was created or changed and the Pele Board's `show_diagram` tool is available, draw `taskos-tasks` again, as [the project board reference](../../references/project-board.md) says.
    - A status seen in an external system goes in the task's `external.last_observed_status`, with `observed_at`. Propose the matching `task_status` change to the user and apply it only on their yes.
 7. Tell the user in one line what you saved, naming each record by its title or task number: "Saved: the July–August open rate from Anna's export; T-2 now waits on Anna." Give ids and paths when the user asks for them or ran capture themselves.
 

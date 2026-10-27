@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="#install"><img src="https://img.shields.io/badge/version-0.4.0-1f5f8b" alt="Version 0.4.0"></a> <a href="#claude-code"><img src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" alt="Claude Code plugin"></a> <a href="#codex"><img src="https://img.shields.io/badge/Codex-plugin-111111" alt="Codex plugin"></a> <a href="#what-you-need"><img src="https://img.shields.io/badge/Node.js-22.18%2B-5FA04E" alt="Node.js 22.18 or later"></a> <a href="#status"><img src="https://img.shields.io/badge/status-stage%201%3A%20skills%20only-c9a227" alt="Status: stage 1, skills only"></a>
+  <a href="#install"><img src="https://img.shields.io/badge/version-0.5.0-1f5f8b" alt="Version 0.5.0"></a> <a href="#claude-code"><img src="https://img.shields.io/badge/Claude%20Code-plugin-D97757" alt="Claude Code plugin"></a> <a href="#codex"><img src="https://img.shields.io/badge/Codex-plugin-111111" alt="Codex plugin"></a> <a href="#what-you-need"><img src="https://img.shields.io/badge/Node.js-22.18%2B-5FA04E" alt="Node.js 22.18 or later"></a> <a href="#status"><img src="https://img.shields.io/badge/status-stage%201%3A%20skills%20only-c9a227" alt="Status: stage 1, skills only"></a>
 </p>
 
 <p align="center">
@@ -21,24 +21,24 @@
 
 Task OS turns Claude Code or Codex into an assistant for one project: your part of a team's work inside a company, a client assignment, or a job that comes back every quarter. You give it tasks in plain words. It does the legwork, drafts what goes out for you to send, and keeps the books on its own: what's open, who's waiting on whom, what was decided, and what every number rests on.
 
-Everything lives as plain files in the folder you already work from, so the assistant you open tomorrow, in either agent, knows what today's did.
+Everything lives as plain files in the folder you already work from, so the assistant you open tomorrow, in either agent, knows what today's did. Two companion plugins take it further: [open-cu](https://github.com/ossianravn/open-computer-use) lets it work in any app or site on your screen, and [Pele Board](https://github.com/ossianravn/pele-agent-plugin) keeps your tasks on a live board in your browser.
 
 ## A day with Task OS
 
 | When | You | Your assistant |
 | --- | --- | --- |
-| Morning | Open Claude Code or Codex in the project folder | Briefs you before anything else: what's open, what's waiting on whom, and the next step from the last handoff |
-| A mail arrives | "Anna sent the September numbers." | Reads them, saves each figure with its source, notes that the waiting task can move, and tells you in one line |
+| Morning | Open Claude Code or Codex in the project folder | Briefs you before anything else: what's open, what's waiting on whom, and the next step from the last handoff. Your tasks appear on the live board |
+| A mail arrives | "Anna sent the September numbers." | Reads them, saves each figure with its source, moves the waiting task on, and tells you in one line |
 | A question | "Where is WEB-42 at?" | Opens the ticket through your DevOps connector or, with open-cu, in your browser, and saves its status with the date |
 | Work | "Draft the Q3 summary for the board." | Writes it in Anna's format and the board's language, names the source of each figure, and records the draft |
 | In passing | "Anna needs it by Friday now." | Moves the deadline on the task and notes that Anna said so |
-| Evening | "That's it for today." | Writes the handoff: goal, state, blockers and one next action |
+| Evening | "That's it for today." | Writes the handoff: goal, state, blockers and one next action, and redraws where you stopped on the board |
 
 It keeps the books as it goes, and you can still say "log this" whenever you want something kept. Tomorrow you can open Codex instead of Claude Code, or the other way round; the brief is the same.
 
 ## How it gets there
 
-Three parts make those promises hold. **Setup** builds a picture of your project once. **Every session** then follows the same routine around that picture. And **your agent** does the work with its own model, the tools you connect and, with open-cu, any app or site on your screen. Task OS itself is four skills, a short block in your `AGENTS.md`, and plain files in a `work/` folder.
+Three parts make those promises hold. **Setup** builds a picture of your project once. **Every session** then follows the same routine around that picture, and with Pele Board you watch it on a live board. And **your agent** does the work with its own model, the tools you connect and, with open-cu, any app or site on your screen. Task OS itself is four skills, a short block in your `AGENTS.md`, and plain files in a `work/` folder.
 
 ### 1. Setup builds the picture of your project
 
@@ -50,7 +50,7 @@ You run setup once, in the folder you work from. It reads what is already there,
 
 1. **It reads the folder.** Setup lists every file and recognises what it can: a running project log with dated entries, a note on how you communicate with people, lists of people or systems, and folders of saved mail, exports, tickets and earlier deliveries. It reads text files (`.md`, `.txt`, `.log`, `.csv`, `.tsv`, saved `.eml` mail) and lists everything else with the reason it was set aside. It also spots contradictions, such as an export named "Q3" whose rows cover July and August.
 2. **It shows you what it found.** You see what it takes each file to be, cited to the file and line, and which files it will read as sources. You confirm, and you can leave out anything you like, such as an HR folder.
-3. **It asks you what only you know,** one question at a time. Facts it can find in the folder it looks up itself; you answer the decisions. A short job takes four questions. On Windows and macOS, setup also recommends open-cu, so every system without a connector can be worked on screen.
+3. **It asks you what only you know,** one question at a time. Facts it can find in the folder it looks up itself; you answer the decisions. A short job takes four questions. Setup then recommends the two companion plugins, with the install commands from their own READMEs: open-cu on Windows and macOS, so every system without a connector can be worked on screen, and Pele Board on any system, for the live board.
 
    <details>
    <summary>The questions, in order</summary>
@@ -87,7 +87,7 @@ You run setup once, in the folder you work from. It reads what is already there,
    ```
    </details>
 
-6. **It does a first real task with you.** It takes the first task you named, works it through with you, saves the result and writes the first handoff. Open the other agent in the same folder, ask for a brief, and it names the same next step.
+6. **It does a first real task with you.** It takes the first task you named, works it through with you, saves the result and writes the first handoff. With Pele Board, your tasks and where you stopped are now on the board. Open the other agent in the same folder, ask for a brief, and it names the same next step.
 
 **What you end up with.** This is the folder from the test run after setup: three saved mails, an export and last quarter's report went in.
 
@@ -136,7 +136,7 @@ Every preference points at the lines it came from.
 ### 2. Every session follows the same routine
 
 <p align="center">
-  <img src="assets/session.svg" alt="Every session, in Claude Code or Codex: the agent loads AGENTS.md, then 1 brief reads where we stopped and what's going on, 2 your tasks look up who and how, 3 capture writes tasks, decisions and findings, 4 handoff writes where we stopped, which the next session starts from." width="100%">
+  <img src="assets/session.svg" alt="Every session, in Claude Code or Codex: the agent loads AGENTS.md, then 1 brief reads where we stopped and what's going on, 2 your tasks look up who and how, 3 capture writes tasks, decisions and findings, 4 handoff writes where we stopped, which the next session starts from. Below, a live board with Pele Board, drawn from work/: brief draws it each session, capture moves the cards, handoff redraws the plan." width="100%">
 </p>
 
 Claude Code and Codex both load `AGENTS.md` when a session starts, and the Task OS block in it sets the routine:
@@ -154,6 +154,23 @@ Claude Code and Codex both load `AGENTS.md` when a session starts, and the Task 
 
   After each save it tells you in one line what it kept, so you can watch the books being kept.
 - **Hand off.** When the work stops or you sign off, the `handoff` skill writes the session's goal, state, blockers and one next action.
+- **Show it on the board.** With Pele Board installed, the brief puts the project on a live board in your browser: your tasks by status, and where you stopped. When a task changes, its card moves; the handoff redraws the plan. The board is a view of `work/`, drawn again at the start of every session, so your project lives in one place: the files.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/board-tasks-dark.png">
+    <img src="assets/board-tasks-light.png" alt="The live board from the test run, titled Tasks · Q3 newsletter summary, with the next step as its caption. Active: T-2 Get the missing Q3 data from Anna. Waiting: T-3 Write the Q3 summary for the board, waiting on T-2. Done: T-1 Check what the export covers. Each card shows its owner, Kim." width="100%">
+  </picture>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/board-plan-dark.png">
+    <img src="assets/board-plan-light.png" alt="The same board showing Where we stopped, drawn from the handoff: Export checked, July–August only, is done; Ask Anna for September is the next action; Write the Q3 summary and Send it to Anna by 19 October are still to do; Deadline to confirm is a blocker on sending." width="100%">
+  </picture>
+</p>
+
+<p align="center"><sub>The board from the test run, in Pele Board. It follows your light or dark setting.</sub></p>
 
 <details>
 <summary>A task it keeps: <code>work/tasks/T-2-get-the-missing-q3-data-from-anna.md</code>, shortened</summary>
@@ -177,7 +194,7 @@ Everything lives in your folder, which is why switching agents works:
   <img src="assets/handoff.svg" alt="On Monday Codex briefs, works on the Q3 report, saves what it finds and writes the handoff 'Ask Anna for the September numbers' into the folder. On Tuesday Claude Code reads that handoff first, knows the next step and carries on where Monday stopped." width="100%">
 </p>
 
-**Limit:** in stage 1 the routine rests on the agent following `AGENTS.md`. If a session ends abruptly, the next brief starts from the last handoff that was written. Stage 2 adds hooks that run the brief and ask for the handoff automatically.
+**Limit:** in stage 1 the routine rests on the agent following `AGENTS.md`. If a session ends abruptly, the next brief starts from the last handoff that was written. Stage 2 adds hooks that run the brief and ask for the handoff automatically. The board shows what the records say; to change a task, tell your agent or edit its file.
 
 ### 3. Your agent does the work, in your tools and on your screen
 
@@ -190,7 +207,7 @@ The work itself is done by Claude Code or Codex, with their own model. Task OS g
 Your agent reaches the systems behind the work in three ways, and setup records which one each system uses:
 
 - **A connector.** Mail, Trello, Azure DevOps, analytics, or anything else with an MCP server, plugin or connector you add to Claude Code or Codex.
-- **Your screen, with open-cu.** On Windows and macOS, [open-cu](https://github.com/ossianravn/open-computer-use) lets your agent work in any app or site you can open: it reads the window, clicks, types and fills in forms, the way you would. A CRM without a connector, a client's portal, a DevOps board in the browser: all within reach. Setup recommends it and gives you the install command.
+- **Your screen, with open-cu.** On Windows and macOS, [open-cu](https://github.com/ossianravn/open-computer-use) lets your agent work in any app or site you can open: it reads the window, clicks, types and fills in forms, the way you would. A CRM without a connector, a client's portal, a DevOps board in the browser: all within reach. Setup recommends it and gives you the install commands.
 - **Someone else.** A system run by someone else reaches you as exports and mails, saved in your folder; its record names who to ask.
 
 When the agent reads a ticket, a mail or a screen, it saves what it saw with a pointer back (`ticket:WEB-42`, `mail:<message-id>`, `screen:Azure DevOps/Boards/WEB-42`) and the date. Changing anything outside your folder, such as sending a mail, moving a card or submitting a form, waits for your OK.
@@ -242,7 +259,7 @@ A figure from a mail stays what someone said until a source shows it. [See it wo
 | --- | --- | --- |
 | It knows the project | Setup writes down the people, systems and rules; every session's instructions point the agent there first | `work/people/`, `work/systems/`, `work/ways-of-working.md` |
 | It does the work you hand it | Your agent's own model, your connectors and, with open-cu, your screen, working by the project's rules | `work/ways-of-working.md` |
-| It keeps track of every task and decision | `capture` saves facts, decisions and task changes the moment they come up | `work/tasks/`, `work/records/` |
+| It keeps track of every task and decision | `capture` saves facts, decisions and task changes the moment they come up | `work/tasks/`, `work/records/`, and the live board with Pele Board |
 | It picks up tomorrow where you left off | `handoff` writes the next step when work stops; the next session briefs from it first | the newest `*-handoff-*.md` in `work/records/` |
 
 In stage 1 the routine runs on written instructions; stage 2 makes most of it automatic:
@@ -253,6 +270,7 @@ In stage 1 the routine runs on written instructions; stage 2 makes most of it au
 | The brief at the start | The `AGENTS.md` block asks for it | A session-start hook runs it |
 | Keeping the records current | The `AGENTS.md` block and the `capture` skill's list of what to keep | Same, and the `taskos` command checks every record it writes |
 | The handoff when work stops | The `AGENTS.md` block asks for it | A stop hook asks for it when it's missing |
+| The live board, with Pele Board | `brief`, `capture` and `handoff` draw it from `work/` | Same |
 | Finding things | The agent searches your files and records | A search index across both, with `recall` |
 | Checking connections | Your word, recorded at setup | `doctor` checks each one (stage 3) |
 
@@ -307,6 +325,7 @@ Task OS keeps what worked and gives it structure: a record for each claim, task 
 - Claude Code 2.1.277 or later, or the Codex CLI. [COMPATIBILITY.md](COMPATIBILITY.md) lists the tested versions.
 - Node.js 22.18 or later on your `PATH`. The skills run a small bundled script to mint record ids.
 - For working in apps and sites on screen: Windows 10/11 or macOS 14+, with [open-cu](#recommended-open-cu-for-apps-and-sites-on-screen).
+- For the live board: [Pele Board](#recommended-pele-board-for-a-live-board), on any system.
 - That is all. Task OS runs on the files in your folder.
 
 ### Claude Code
@@ -351,21 +370,55 @@ Start a new Codex session. Running `/skills` lists `task-os:setup`, `task-os:bri
 
 ### Recommended: open-cu, for apps and sites on screen
 
-open-cu lets your agent work in any app or site you can open, for every system without a connector. It runs on Windows 10/11 and macOS 14+, and comes from the same marketplace.
+[open-cu](https://github.com/ossianravn/open-computer-use) lets your agent work in any app or site you can open, for every system without a connector. It runs on Windows 10/11 and macOS 14+, and installs from its own marketplace.
 
-In Claude Code, submit:
+In Claude Code, submit one after the other:
 
 ```text
-/plugin install open-cu@task-os
+/plugin marketplace add ossianravn/open-computer-use
+```
+
+```text
+/plugin install open-cu@open-cu
 ```
 
 In Codex, run:
 
 ```bash
-codex plugin add open-cu@task-os
+codex plugin marketplace add ossianravn/open-computer-use
 ```
 
-Start a new session afterwards. On macOS, give your agent app **Accessibility** and **Screen & System Audio Recording** permission, as open-cu's [macOS permissions](https://github.com/ossianravn/open-computer-use#macos-permissions) section shows. If you already use open-cu from its own marketplace, keep that copy; setup finds it either way.
+```bash
+codex plugin add open-cu@open-cu
+```
+
+Start a new session afterwards. On macOS, give your agent app **Accessibility** and **Screen & System Audio Recording** permission, as open-cu's [macOS permissions](https://github.com/ossianravn/open-computer-use#macos-permissions) section shows. Its README also covers the Claude and Codex desktop apps, and the safety settings.
+
+### Recommended: Pele Board, for a live board
+
+[Pele Board](https://github.com/ossianravn/pele-agent-plugin) shows your tasks and where you stopped on a live page in your browser, and updates it as the work moves. It runs on any system with Node.js 20 or later, and installs from its own marketplace.
+
+In Claude Code, submit one after the other:
+
+```text
+/plugin marketplace add ossianravn/pele-agent-plugin
+```
+
+```text
+/plugin install pele-board@pele-board
+```
+
+In Codex, run:
+
+```bash
+codex plugin marketplace add ossianravn/pele-agent-plugin
+```
+
+```bash
+codex plugin add pele-board@pele-board
+```
+
+Restart Claude Code, or start a new Codex session. The board opens in your browser the first time your agent draws on it.
 
 ### Run setup
 
@@ -379,11 +432,17 @@ Open your agent in the folder you work from for one project: notes, saved mails 
 ## Your files stay yours
 
 - **Your files stay put.** Setup keeps every existing file where it is, byte for byte. It appends one block to `AGENTS.md`, plus a one-line `@AGENTS.md` import in `CLAUDE.md` when Claude Code needs it to read `AGENTS.md`. Everything else it writes is new.
-- **Everything stays local.** The plugin works with the files in your folder, on your machine. Your agent reaches the tools you've connected and, with open-cu, the apps on your screen, and only those.
+- **Everything stays local.** The plugin works with the files in your folder, on your machine. Your agent reaches the tools you've connected and, with open-cu, the apps on your screen, and only those. Pele Board serves the board from your own machine, at a `127.0.0.1` address.
 - **Mail and screens are data.** An instruction inside a mail, a ticket or an app on screen is quoted to you, and you decide what happens.
 - **Plain files.** Records are markdown with a short header, so you can read, search and commit them like any notes.
 
 ## Questions you might have
+
+<details>
+<summary><b>Where do I see my tasks?</b></summary>
+
+Ask "what's open?" any time, or read the brief at the start of each session. Each task is a file in `work/tasks/` with its owner, status and next step. With Pele Board, they're also on a live board in your browser, next to a map of where you stopped, and the cards move as the work does.
+</details>
 
 <details>
 <summary><b>Can I edit the records myself?</b></summary>
@@ -439,15 +498,21 @@ It reads the mails you save in the project folder, your mailbox through a mail c
 Uninstall the plugin; your folder keeps every record as readable markdown. The block in `AGENTS.md` sits between two marker lines, so you can delete it in one go.
 </details>
 
-## Modules
+## Modules and companions
 
-Three optional plugins come from the same marketplace:
+Two optional modules come from the Task OS marketplace:
 
 - **`task-os-grill`**: an interview that settles open decisions in rounds and records each one as it's settled. Useful when a workstream kicks off. Needs the core plugin.
 - **`task-os-writing`**: rules for writing the text agents read, such as the `AGENTS.md` block and skill files.
-- **`open-cu`**: lets your agent work in any app or site on your screen, on Windows and macOS. It is its own project, [ossianravn/open-computer-use](https://github.com/ossianravn/open-computer-use), listed here so one marketplace covers everything.
 
 Install them like the core: `/plugin install task-os-grill@task-os` in Claude Code, `codex plugin add task-os-grill@task-os` in Codex.
+
+Two companion plugins are projects of their own, each with its own marketplace. Setup recommends both and gives you their install commands:
+
+- **[open-cu](https://github.com/ossianravn/open-computer-use)**: your agent works in any app or site on your screen, on Windows and macOS. [Install](#recommended-open-cu-for-apps-and-sites-on-screen)
+- **[Pele Board](https://github.com/ossianravn/pele-agent-plugin)**: your tasks and where you stopped on a live board in your browser, on any system. [Install](#recommended-pele-board-for-a-live-board)
+
+Task OS works without them, and uses each one as soon as it's installed.
 
 ## Status
 
@@ -456,7 +521,7 @@ Task OS is built in stages, each tested against the [fixtures](fixtures/) before
 | Stage | Adds | State |
 | --- | --- | --- |
 | 0 | Two test projects, with the results a correct run must produce | Done |
-| 1 | The skills above, and open-cu for apps and sites on screen; the assistant writes records as markdown | **Now**: a week of real use |
+| 1 | The skills above, with open-cu for apps and sites on screen and Pele Board for a live board; the assistant writes records as markdown | **Now**: a week of real use |
 | 2 | The `taskos` command line, search across records and your files, automatic brief and handoff, `recall`, `verify` and `task` | Next |
 | 3 | Corrections that replace earlier records, `tidy`, `doctor`, an MCP server, optional Jev judgments | Planned |
 | 4 | Handing a workstream over to a colleague | Planned |
@@ -473,11 +538,11 @@ Known limits in stage 1, beyond those under [How it gets there](#how-it-gets-the
 | Update | `claude plugin marketplace update task-os`, then `claude plugin update task-os@task-os` | `codex plugin marketplace upgrade task-os` |
 | Remove | `claude plugin uninstall task-os@task-os` | `codex plugin remove task-os@task-os` |
 
-Removing the plugin leaves your folders and records as they are.
+Removing the plugin leaves your folders and records as they are. open-cu and Pele Board update and uninstall through their own marketplaces, as their READMEs show.
 
 ## Credits
 
-`task-os-grill` and `task-os-writing` adapt skills from [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock, used under the MIT License. See their `NOTICE.md` files. The header illustration was generated with GPT Image; the diagrams are hand-drawn SVG in [assets/](assets/).
+`task-os-grill` and `task-os-writing` adapt skills from [mattpocock/skills](https://github.com/mattpocock/skills) by Matt Pocock, used under the MIT License. See their `NOTICE.md` files. The header illustration was generated with GPT Image; the diagrams are hand-drawn SVG in [assets/](assets/), and the board screenshots come from Pele Board, rendered by [pele](https://pele.run).
 
 ## Development
 

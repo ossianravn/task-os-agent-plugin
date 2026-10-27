@@ -22,13 +22,11 @@ All on Windows 11 Pro (10.0.26200), Node 24.19.0. The local checks ran against t
 | Codex CLI | 0.163.0 | same | `codex debug prompt-input` | the model sees `task-os:brief`, `task-os:capture`, `task-os:handoff`, `task-os-grill:grill` and `task-os-writing:writing` with full descriptions; `task-os:setup` is hidden from implicit use, as configured |
 | Claude Code | 2.1.306 | GitHub `ossianravn/task-os-agent-plugin` at `22fc0dc`, isolated `CLAUDE_CONFIG_DIR` | `marketplace add`, `install` of all three plugins, `plugin details` | installed from the plugin cache; same four core skills; the id script runs from the cached copy |
 | Codex CLI | 0.163.0 | GitHub at `22fc0dc`, isolated `CODEX_HOME` | `marketplace add`, `plugin add` of all three plugins, `codex debug prompt-input` | installed; the model sees the same five skills |
-
-| Claude Code | 2.1.306 | local checkout, isolated `CLAUDE_CONFIG_DIR` | `install open-cu@task-os` (fetched from `ossianravn/open-computer-use`), `plugin details` | installed; skill `open-cu` and MCP server `open-cu` found |
-| Codex CLI | 0.163.0 | local checkout, isolated `CODEX_HOME` | `plugin add open-cu@task-os` | installed open-cu 0.2.1 into the cache; `node dist/cli.mjs --help` runs from the cached copy |
+| Claude Code | 2.1.306 | Pele Board 0.1.0, installed from its own marketplace; checked 2026-10-27 | `show_diagram` with `taskos-tasks` (kanban) and `taskos-plan` (flowchart), drawn from the setup test records for `fixtures/project-b` | both accepted and rendered, in light and dark mode; the README screenshots come from this run |
 
 The first GitHub attempt failed in both hosts with Git's "Filename too long", because the isolated test folders sat under a 130-character temporary path and the clone's deepest file reached 270 characters. With `core.longpaths` set for the test processes only, both installs passed. Under a normal `C:\Users\<name>\.claude` or `.codex`, the deepest file is about 165 characters, well under Windows' 260-character limit.
 
-Not exercised: a live Codex session, explicit `$task-os:setup` in Codex, the Codex desktop app, WSL and macOS.
+Not exercised: a live Codex session, explicit `$task-os:setup` in Codex, the Codex desktop app, WSL and macOS. open-cu and Pele Board install from their own marketplaces, with the commands their READMEs document; their own compatibility records cover those installs, and this repo has not repeated them.
 
 ## Host behaviour observed
 
