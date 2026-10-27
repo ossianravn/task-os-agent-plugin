@@ -11,7 +11,7 @@ Turn material into one record per claim, each with its basis and its sources, wr
 
 Capture right after it happens, before you move on:
 
-- A fact arrives from a source (a mail, ticket, export, query result or meeting note): a `finding` that cites it.
+- A fact arrives from a source (a mail, ticket, export, query result, meeting note, or an app or site read on screen): a `finding` that cites it.
 - Someone with authority decides something, or the user does: a `decision`.
 - New work appears (a request, a promise the user made, a follow-up, a deadline): a `task` with owner and next step.
 - Work changes (done, blocked, waiting on someone, a new deadline): update the task.
@@ -32,7 +32,7 @@ Leave out small talk, your own intermediate steps, and guesses nobody relies on.
    - `lesson`: a practice to repeat or avoid.
    - `progress`: what was done. `log <text>` writes one directly, with the text as its summary.
    - `person`, `system`, `task`, `workstream`: create the file, or edit the existing one in place.
-   - `evidence`: an excerpt from a source that is not a file in the folder and may change or vanish.
+   - `evidence`: an excerpt from a live source that may change or vanish: a query result, a chat message, or an app or site read on screen with open-cu.
    - Glossary term: add a row to `work/glossary.md`.
 
    When the type, the basis or the owner is unclear, write the item to `work/inbox/` with its `reason` and `next_action`.

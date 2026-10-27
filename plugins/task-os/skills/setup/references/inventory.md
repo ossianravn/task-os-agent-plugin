@@ -16,7 +16,7 @@ Build a picture of the folder before asking the user anything. Cite each fact yo
 7. Draft, each item marked as read from a file (with its citation) or guessed:
    - The project's shape: ongoing (your own role, or a long mandate), a contracted piece of work, or an occasional job.
    - People, with role, authority and channel.
-   - Systems, with how the user appears to reach each: directly, through someone else (who), or not at all.
+   - Systems, with how the user appears to reach each: through a connector, on screen in an app or site, through someone else (who), or out of reach.
    - Glossary candidates: the project's and organisation's terms, abbreviations, and Danish and English pairs.
    - The facts the current work rests on, and the open task the files point to.
 8. List every contradiction between files (one file says access, another says pending; a file name says Q3 and the rows cover July and August). Each one becomes an interview question.

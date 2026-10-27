@@ -12,7 +12,7 @@ Give the user, and yourself, the state of the project from its local records, in
 3. Treat a record as superseded when another record lists its id under `supersedes`.
 4. Write the brief in this order:
    - **Workspace**: its name.
-   - **Access**: one line naming the systems the user reaches directly and those reached through someone else, from `access` in `work/systems/*.md`.
+   - **Access**: one line naming the systems the user reaches through a connector, those worked on screen with open-cu, and those reached through someone else, from `access` and `route` in `work/systems/*.md`.
    - **Workstreams** that are not done, at most 5: title, state, next action.
    - **Tasks** that are `active` or `waiting`, at most 10, one line each: `T-<n>`, title, status, next action, and for an external ref its last observed status and date.
    - **Last handoff**: the newest `work/records/*/*-handoff-*.md` whose `recorded_by.person` is the profile's person, from any host, in full.

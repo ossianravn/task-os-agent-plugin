@@ -23,18 +23,20 @@ Adopt the folder in place, ask only what its files cannot tell you, write the hu
 3. **Interview.** Ask only what the inventory left open, one decision at a time, in this order. An occasional job needs only the first four.
    1. The work, the user's role, and what success looks like.
    2. How work reaches the user and how they deliver it: channels, cadence, recipients.
-   3. For each system the work depends on: does the user query it, does someone else send extracts or answers (who), or can the user not see it; and which resource it means.
+   3. For each system the work depends on, how the user reaches it: through a connector in their agent (an MCP server, plugin or connector), on screen with open-cu (any app or site they can open on Windows or macOS), through someone who sends extracts or answers (who), or out of reach; and which resource it means.
    4. Current priorities, and the first task worth finishing together in this session.
    5. Decision-makers and collaborators: role, authority (decides, recommends, informed), channel, formality.
    6. Communication practices for each audience and channel, and what never goes out without review.
 
-   Then, for every project, ask which modules to enable: `task-os-grill` and `task-os-writing`. For a module that is not installed, give the install command for this host: in Claude Code `/plugin install task-os-grill@task-os`; in Codex `codex plugin add task-os-grill@task-os`. When the Task OS `grill` skill is available, run this interview in its rounds. Look up facts yourself; put only decisions to the user.
+   Then, for every project, ask which modules to enable: `task-os-grill` and `task-os-writing`. For a module the host lacks, give the install command for this host: in Claude Code `/plugin install task-os-grill@task-os`; in Codex `codex plugin add task-os-grill@task-os`. When the Task OS `grill` skill is available, run this interview in its rounds. Look up facts yourself; put only decisions to the user.
+
+   On Windows 10/11 and macOS 14+, recommend open-cu: it lets the agent work in any app or site the user can open on screen, which covers every system without a connector. When its tools (`list_apps`, `get_app_state`) are available in this session, open-cu is ready. Otherwise give the install command for this host, then a new session: in Claude Code `/plugin install open-cu@task-os`; in Codex `codex plugin add open-cu@task-os`. On macOS, the agent app also needs Accessibility and Screen & System Audio Recording permission; point the user to the "macOS permissions" section of open-cu's README (https://github.com/ossianravn/open-computer-use). On Linux, record the systems that would need it as reached through someone or out of reach for now.
 4. **Write the hub.**
    - `.taskos/workspace.yaml` from `<plugin>/templates/workspace.yaml`.
    - `.taskos/local/profile.yaml`: `person` (the user's person id), `name`, `role`.
    - `.taskos/.gitignore` containing `local/`, `index.sqlite*` and `.lock`; `work/.gitignore` containing `sources/`.
    - `work/context.md`, `work/ways-of-working.md` and `work/glossary.md` from `<plugin>/templates/`. When a communication document is mapped, `ways-of-working.md` points at it and adds only the defaults and the user's decisions.
-   - A person record for the user and for each person named in step 3 or the inventory; a system record for each system, with `access` and, for `via_person`, `supplied_by`.
+   - A person record for the user and for each person named in step 3 or the inventory; a system record for each system, with `access`; for `direct`, its `route` (`connector` or `on_screen`); for `via_person`, `supplied_by`.
    - A workstream for the current work, and a task for each open piece of work the user confirms.
 5. **Capture the history the work rests on.** Read the legacy log and the sources, and capture the consequential findings, decisions and corrections with the Task OS `capture` skill, each citing its file and lines. A claim that later material corrected is captured as `superseded`, with the correction that supersedes it. A conclusion written as fact without evidence is `inferred`.
 6. **Instruction files.**

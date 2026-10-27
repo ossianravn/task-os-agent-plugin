@@ -81,7 +81,7 @@ A claim built from inputs of different basis takes the weakest of them and cites
 - `mail:<message-id>`, `ticket:<KEY>`, `url:https://…`, `ga4:<property>/<query>`
 - the id of an evidence record
 
-For a source that is not a file in the folder and may change or vanish (a live query, a chat message, a call), write an `evidence` record with the excerpt and cite its id. Evidence records are never edited after capture.
+For a live source that may change or vanish (a query, a chat message, a call, an app or site read on screen), write an `evidence` record with the excerpt and cite its id. For a screen read, `locator` names the app or site and the view, such as `screen:Azure DevOps/Boards/WEB-42`. Evidence records are never edited after capture.
 
 ## Supersession and edits
 
@@ -144,10 +144,11 @@ aliases: [KD]
 # system
 purpose: What the system is for in this work
 access: direct                   # direct | via_person | none
+route: connector                 # direct only: connector (MCP server, plugin or connector) | on_screen (open-cu)
 supplied_by: <person id>         # via_person only
 environments: [production, staging]
-resources: [properties/123456]
-mcp_server: <name in the host>   # direct only, optional
+resources: [properties/123456]  # for on_screen: the app or the site address
+mcp_server: <name in the host>   # route connector, optional
 
 # evidence
 system: ga4

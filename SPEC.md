@@ -41,7 +41,7 @@ These are settled; do not reopen them during implementation.
 | Search | FTS5 over records and mapped text files (read-only) plus metadata filters, entity and glossary aliases, record links; embeddings are a later extension |
 | Interfaces | CLI first; a stdio MCP server in stage 3 exposing the same verbs and schemas; domain operations, never raw SQL |
 | Write-back | Draft-first for anything addressed to someone else, and ask-first for any change outside the folder (a ticket, a card, a calendar), are the default working agreements in `work/ways-of-working.md`; sending and changing are the human's action until relaxed there |
-| Modules | Core installed by default; JEV 9000 and open-cu as git-backed marketplace entries; `grill` and `writing` adapted from MIT skills and shipped in this repo with attribution |
+| Modules | Core installed by default; JEV 9000 and open-cu as git-backed marketplace entries, with open-cu recommended by `setup` on Windows and macOS so the agent can work in any app or site on screen; `grill` and `writing` adapted from MIT skills and shipped in this repo with attribution |
 
 ## 3. Repository layout and runtime
 
@@ -136,7 +136,7 @@ modules:
   grill: true
   writing: true
   jev-9000: { judgments: [relevance, support] }   # false, or the judgment kinds in section 11
-  open-cu: false
+  open-cu: true                 # Windows and macOS: apps and sites on screen
 integrations:                 # systems reached directly through a host connection; systems/ records the rest
   - { system: ga4, resource: properties/123456 }
   - { system: tickets, resource: ACME/WEB }
@@ -195,7 +195,7 @@ Type-specific fields:
 | `task` | `number` (int, assigned by the core), `task_status` (`backlog` `active` `waiting` `done` `cancelled`), `owner` (person id), `outcome`, `next_action`, `depends_on[]`, `due` (optional), `external` `{ system, ref, last_observed_status, observed_at }` (optional; absent when no external system tracks the work) |
 | `workstream` | `outcome`, `state` (free text), `depends_on[]`, `next_action`, `owner` |
 | `person` | `role`, `authority` (`decides` `recommends` `informed`), `channels[]`, `preferences` (free text, stated only), `aliases[]` |
-| `system` | `purpose`, `access` (`direct`: the person queries it; `via_person`: someone else supplies extracts or answers; `none`: known but out of reach), `supplied_by` (person id, for `via_person`), `environments[]`, `resources[]` (property, project, mailbox ids), `mcp_server` (name as declared in the host; `direct` only) |
+| `system` | `purpose`, `access` (`direct`: the person queries it; `via_person`: someone else supplies extracts or answers; `none`: known but out of reach), `route` (for `direct`: `connector` through an MCP server, plugin or connector, or `on_screen` through open-cu), `supplied_by` (person id, for `via_person`), `environments[]`, `resources[]` (property, project, mailbox ids; for `on_screen`, the app or site address), `mcp_server` (name as declared in the host; `route: connector` only) |
 | `evidence` | `system`, `scope` (account, property, project, mailbox), `locator` (stable id or URL), `captured_at`, `event_time` (optional), `excerpt` (text or result reference), `completeness` (`reference_only` `partial` `full`), `access_note` |
 | `knowledge` | `derived_from[]` of `{ id, rev }` and section-level `[[id]]` links; a claim per section with its own `basis` and `knowledge_state` in a trailing `<!-- claims: -->` block or per-section frontmatter list |
 | `inbox` | `reason`, `next_action`, `source_path` |
@@ -204,7 +204,7 @@ File naming: `records/YYYY/YYYY-MM-DD-<type>-<slug>.md`, `evidence/YYYY-MM-DD-<s
 
 Evidence shorthand: when an agent writes `ticket:ACME-1187`, `mail:<message-id>`, `url:https://...`, `file:path#L12` or `file:path#L12-L30`, or `ga4:<property>/<query>` in `source_refs`, the core resolves it into an evidence descriptor (creating one when none matches by system + locator) and replaces the shorthand with the UUID. A new observation of a changing source creates a new descriptor; descriptors are never edited after capture.
 
-Basis follows who looked. What the person saw in a system, or in a raw extract of it, is `observed`, scoped to what that extract covers; what someone told them about a system is `reported`. Evidence that arrived through someone else keeps the source system in `system` and points `locator` at the mail or file it came in.
+Basis follows who looked. What the person saw in a system, or in a raw extract of it, is `observed`, scoped to what that extract covers; what someone told them about a system is `reported`. Evidence that arrived through someone else keeps the source system in `system` and points `locator` at the mail or file it came in. A reading taken on screen with open-cu is an evidence descriptor with basis `observed`, whose `locator` names the app or site and the view, such as `screen:Azure DevOps/Boards/WEB-42`.
 
 Tasks: the external system owns the live status; the task owns the plan. `task` reconciles by recording `last_observed_status` and `observed_at`, never by overwriting `task_status`.
 
@@ -220,6 +220,7 @@ This folder is a Task OS project hub (`019a3c2e-...`). Durable knowledge lives i
 - Tag every consequential statement with its basis: user_stated, reported, observed, inferred or assumed. "I don't know yet, checking" beats a guess.
 - Save as you go, without being asked: findings, decisions, corrections, task changes and progress become records through `taskos capture`; say in one line what you saved; unclassified material goes to `work/inbox/`, never a new folder.
 - Before you stop, write a handoff: `taskos handoff`.
+- For systems with `route: on_screen` in `work/systems/`, open the app or site yourself with open-cu and read what you need.
 - Anything addressed to someone else follows `work/ways-of-working.md`: run `verify` first. Sending it, and any change outside this folder, waits for the user's OK.
 - Skills: setup, brief, capture (log), task, recall, verify, tidy, handoff, doctor.
 <!-- taskos:end -->
@@ -326,8 +327,8 @@ Skills carry the reasoning; each one is a `skills/<name>/SKILL.md` that tells th
 
 | Skill | Steps | Calls |
 | --- | --- | --- |
-| `setup` | 1. `adopt scan`; present the inventory as a prefilled understanding, including what will be indexed and what skipped, and confirm the source roots and anything to exclude. 2. Ask only the gaps, scaled to the project: an occasional job needs the first four, a long mandate needs all of them. In order: the work, your role and what success looks like; how work reaches you and how you deliver it (channels, cadence, recipients); for each system the work depends on, whether you query it yourself, someone else supplies extracts or answers (and who), or you cannot see it, and which resource it means; current priorities and the first task worth finishing together; decision-makers and collaborators (role, authority, channel, formality); communication practices per audience and channel, and what never goes out without review. Then, for every project: which modules, Jev judgment kinds and integrations to enable from what was detected. 3. `init` or `adopt apply`; write `context.md` (including the project's shape), `ways-of-working.md` (thin, pointing at the mapped document), `glossary.md`, people records, and system records with `access` from the answers. 4. Check connections for systems with `access: direct` (connection states below) and write `host.yaml`. 5. `reindex --full`, `views build`. 6. Finish one real task from step 2 with the user, `capture` its result, `handoff`, then open a fresh session in the other host and show `recall` finding it. Resumable: a partially answered interview is saved to `.taskos/local/setup-state.yaml`. Re-running reconciles the managed block and keeps user edits. When the `grill` module is enabled, step 2 uses its interview pattern. | `adopt scan`, `init`, `adopt apply`, `capture`, `task upsert`, `reindex`, `views build`, `handoff`, `doctor` |
-| `brief` | Return the startup brief: workspace name; one line naming the systems the person reaches directly and those reached through someone else (from system records); active workstreams (max 5) with next action; active and waiting tasks (max 10, one line each); the latest handoff for this person (any host), in full; count and top three of `candidate` and `disputed` claims; `needs_reconciliation` count; inbox count; two pointer lines (ways-of-working path, "recall before asserting"). Local records only; no live integration calls. Under 1,500 tokens; lists truncate with a count. | `brief` |
+| `setup` | 1. `adopt scan`; present the inventory as a prefilled understanding, including what will be indexed and what skipped, and confirm the source roots and anything to exclude. 2. Ask only the gaps, scaled to the project: an occasional job needs the first four, a long mandate needs all of them. In order: the work, your role and what success looks like; how work reaches you and how you deliver it (channels, cadence, recipients); for each system the work depends on, how you reach it: through a connector, on screen with open-cu, through someone who supplies extracts or answers (and who), or out of reach, and which resource it means; current priorities and the first task worth finishing together; decision-makers and collaborators (role, authority, channel, formality); communication practices per audience and channel, and what never goes out without review. Then, for every project: which modules, Jev judgment kinds and integrations to enable from what was detected. On Windows 10/11 and macOS 14+, recommend open-cu for every system without a connector, check its tools are exposed, and give the install command for the host (`open-cu@task-os`); on macOS, point to its Accessibility and Screen Recording permissions. 3. `init` or `adopt apply`; write `context.md` (including the project's shape), `ways-of-working.md` (thin, pointing at the mapped document), `glossary.md`, people records, and system records with `access` from the answers. 4. Check connections for systems with `access: direct` (connection states below) and write `host.yaml`. 5. `reindex --full`, `views build`. 6. Finish one real task from step 2 with the user, `capture` its result, `handoff`, then open a fresh session in the other host and show `recall` finding it. Resumable: a partially answered interview is saved to `.taskos/local/setup-state.yaml`. Re-running reconciles the managed block and keeps user edits. When the `grill` module is enabled, step 2 uses its interview pattern. | `adopt scan`, `init`, `adopt apply`, `capture`, `task upsert`, `reindex`, `views build`, `handoff`, `doctor` |
+| `brief` | Return the startup brief: workspace name; one line naming the systems the person reaches through a connector, those worked on screen with open-cu, and those reached through someone else (from system records); active workstreams (max 5) with next action; active and waiting tasks (max 10, one line each); the latest handoff for this person (any host), in full; count and top three of `candidate` and `disputed` claims; `needs_reconciliation` count; inbox count; two pointer lines (ways-of-working path, "recall before asserting"). Local records only; no live integration calls. Under 1,500 tokens; lists truncate with a count. | `brief` |
 | `capture` | Runs without being asked whenever a fact arrives from a source, someone decides, work appears or changes, a record is contradicted, someone states a preference, or a deliverable is drafted or sent; reports what it saved in one line. Classify the supplied material or an inbox item into one record type (section 5); extract basis, state, evidence shorthand, workstream; write the record; on uncertainty write to `inbox/` with `reason` and `next_action` rather than guessing a type. `log <text>` is `capture progress`. A decision captured during a session also updates the owning workstream's `state`. | `capture`, `evidence resolve`, `task upsert` |
 | `task` | Create or reconcile a task from a ticket, a mail or a sentence: outcome, owner, status, next action, dependencies, external ref. On a changed ticket, `task observe` records the external status; the agent proposes, never silently applies, a `task_status` change. | `task upsert`, `task observe`, `recall` |
 | `recall` | Run `recall`; open the top records; answer with ids, dates, basis and state visible; when a hit carries `needs_reconciliation`, say so and use the replacement record. Reformulate once with glossary aliases and the entities the question involves (`entities`, `recall --entity`) before concluding there is nothing. Treat source hits as history, not current state: prefer an effective record on the same point, say when a correction cites the source, and when a source passage matters to the task, capture a record that cites it by `file:` shorthand. For files the index does not cover (attached repositories, skipped or unmapped files), search with the host's own tools and triage the candidate files before opening them. | `recall`, `entities`, `evidence show`, `capture` |
@@ -338,7 +339,7 @@ Skills carry the reasoning; each one is a `skills/<name>/SKILL.md` that tells th
 
 Where section 11 lists a Jev judgment for a skill, the skill makes it only when that judgment kind is enabled in `workspace.yaml`; otherwise the agent judges the same candidates itself.
 
-Connection states, recorded in `.taskos/local/host.yaml` per host for each system with `access: direct`: `configured` (present in host config), `exposed` (visible as a tool in this session), `authenticated`, `resource_accessible` (the actual property, mailbox or project answered), `exercised` (used for a real task), each with `checked_at` and the operation used. `setup` and `doctor` move a connection up this ladder; nothing assumes a state it has not checked this session. Systems reached through someone else have no connection state; their system record names who supplies them.
+Connection states, recorded in `.taskos/local/host.yaml` per host for each system with `access: direct`: `configured` (present in host config), `exposed` (visible as a tool in this session), `authenticated`, `resource_accessible` (the actual property, mailbox or project answered), `exercised` (used for a real task), each with `checked_at` and the operation used. `setup` and `doctor` move a connection up this ladder; nothing assumes a state it has not checked this session. For `route: on_screen`, the ladder applies to open-cu itself (configured, exposed) and to the app or site answering on screen. Systems reached through someone else have no connection state; their system record names who supplies them.
 
 ## 10. Hooks and host adapters
 
@@ -376,7 +377,7 @@ The explicit `handoff` skill, not the hook, is the primary path: the Stop prompt
 
 ## 11. Packaging, marketplaces and modules
 
-The repo is a marketplace with four entries: the core (installed by default), two skill-only modules in this repo, and two git-backed entries pointing at existing plugins. Nothing is forked.
+The repo is a marketplace with five entries: the core (installed by default), two skill-only modules in this repo, and two git-backed entries pointing at existing plugins. Nothing is forked.
 
 Core manifests:
 
@@ -404,7 +405,7 @@ Marketplace files:
     { "name": "task-os-grill",   "source": "./plugins/task-os-grill",   "description": "Interview that writes decisions and glossary terms" },
     { "name": "task-os-writing", "source": "./plugins/task-os-writing", "description": "Rules for documents agents read" },
     { "name": "jev-9000", "source": { "source": "github", "repo": "ossianravn/jev-9000" }, "description": "Structured second opinions via Jev" },
-    { "name": "open-cu",  "source": { "source": "github", "repo": "ossianravn/open-computer-use" }, "description": "Desktop app control" } ] }
+    { "name": "open-cu",  "source": { "source": "github", "repo": "ossianravn/open-computer-use" }, "description": "Work in any app or site on screen; Windows and macOS" } ] }
 
 // .agents/plugins/marketplace.json  (Codex-native; same entries with policy)
 { "name": "task-os", "interface": { "displayName": "Task OS" },
@@ -436,7 +437,7 @@ Modules:
 | `task-os-grill` | Skill `grill`: a relentless, one-question-at-a-time interview that writes as it goes. Two modes: `setup` uses it to sharpen the project brief (writes `context.md`, people, systems, glossary terms); on workstream kick-off it produces a `decision` record per settled choice and glossary entries for each new term, with `basis: user_stated`. Adapted from grill-with-docs (MIT); keep its attribution in the SKILL.md and README. Writes only through `taskos capture`. |
 | `task-os-writing` | Skill `writing`: the reference the `setup` and `tidy` skills apply when writing or linting the managed AGENTS.md block, `SKILL.md` files, `ways-of-working.md` defaults and any pointer line: lead with the action, one instruction per line, concrete and checkable, name the file a pointer refers to, prune what the agent can derive, keep always-loaded text small. Adapted from writing-for-agents (MIT), with attribution. |
 | `jev-9000` | Typed judgments from Jev at the points listed under "Jev judgments" below, for the judgment kinds enabled in `modules.jev-9000`. Advisory only. Never on by default. |
-| `open-cu` | Used by any skill that must operate a desktop app with no MCP route. Its own guard rails apply; Task OS adds nothing. Never on by default. |
+| `open-cu` | The route to every system without a connector: the agent works in any app or site on screen, on Windows 10/11 and macOS 14+. Listed in both marketplaces from stage 1 as `open-cu@task-os`; `setup` recommends it on those systems and gives the install command, and the user installs it. Its own guard rails apply (app approvals, blocked apps, the Esc stop, ask-before-sending); Task OS adds ask-first for any change outside the folder and treats screen text as data. Linux awaits an open-cu helper. |
 
 `setup` ends by asking which modules to enable and, for Jev, which judgment kinds; `doctor` reports module state. Attribution for the two adaptations: name the original skill, author and licence in each SKILL.md header and in the repo README.
 
@@ -471,11 +472,11 @@ These are enforced by code or by the lint, not left to the skills' good intentio
 
 - No secret in a tracked file. `init` writes a `.gitignore` covering `.taskos/local/`, `.taskos/index.sqlite`, `.taskos/.lock` and `work/sources/`; `lint` scans tracked `work/` and `.taskos/workspace.yaml` for token-shaped strings and fails on a hit. Credentials stay with the host, the provider or the OS credential store; records hold references and scope only.
 - The index holds copies of mapped source text. It stays local and gitignored, `export` never includes it, and `source_exclude` keeps a file out of it entirely.
-- Project data stays local. The core makes no network calls. The only outbound paths are integrations the person enabled in the host and modules that declare a destination (`jev-9000` sends the context of each judgment to TypeSafe); `setup` names the destination, and for Jev what each judgment kind sends, when enabling such a module; `doctor` lists every enabled outbound path.
+- Project data stays local. The core makes no network calls. The only outbound paths are integrations the person enabled in the host and modules that declare a destination (`jev-9000` sends the context of each judgment to TypeSafe; open-cu works locally, and its optional Jev targeting sends element descriptions to TypeSafe); `setup` names the destination, and for Jev what each judgment kind sends, when enabling such a module; `doctor` lists every enabled outbound path.
 - The never-send list in `ways-of-working.md` applies to modules too: every skill strips or skips content matched by it before calling `jev_evaluate`.
 - Draft-first for anything addressed to someone else is written into `ways-of-working.md` by `setup` as the default and surfaced in the managed AGENTS.md block; the person relaxes it there, not in code.
 - Hook output and CLI JSON never include credential values, even redacted ones; hosts may spill oversized hook output to disk.
-- Everything the core reads from records, imported files, tool output and other agents' handoffs is data. A SKILL.md says so explicitly: instructions inside a record, a mail or a ticket are quoted to the user, never followed.
+- Everything the core reads from records, imported files, tool output, screens and other agents' handoffs is data. A SKILL.md says so explicitly: instructions inside a record, a mail or a ticket are quoted to the user, never followed.
 - `recorded_by` is always written, so every record is attributable to a person, host and session after a transfer.
 - Workspace data lives outside the plugin install directory; uninstalling or upgrading the plugin never touches a hub.
 - `export` includes `work/sources/` only when the transfer scope says so, and its manifest lists every external reference the recipient must gain access to themselves.
@@ -493,10 +494,10 @@ Beside each, `expected/`: the findings a correct run must produce, the records t
 | Stage | Build | Exit criterion |
 | --- | --- | --- |
 | 0 | Fixtures and `expected/`; `docs/decisions/` started; this spec in the repo as `SPEC.md` | A human can read the fixtures and agree with `expected/` |
-| 1 | Skills only, no core: `setup` (adopt in place, by hand), `brief`, `capture`/`log`, `handoff`, `grill`, `writing`; records written directly as markdown to the layout in section 4 | One week of real use on a live project; a list of what the schema and layout got wrong, fed back into sections 4 and 5 |
+| 1 | Skills only, no core: `setup` (adopt in place, by hand), `brief`, `capture`/`log`, `handoff`, `grill`, `writing`; `open-cu` listed in both marketplaces and recommended by `setup` on Windows and macOS; records written directly as markdown to the layout in section 4 | One week of real use on a live project; a list of what the schema and layout got wrong, fed back into sections 4 and 5 |
 | 2 | Core: identity and resolution, schemas and validation, write protocol, SQLite index and `reindex`, CLI, launcher; skills `recall`, `verify` (basis/state), `task`; Jev `relevance` judgments in `recall`; hooks SessionStart and Stop in both hosts | Scenarios 1, 2, 3, 6, 9 pass; scenario 10 reported; both hosts load the plugin from the repo marketplace on the author's machine |
 | 3 | `correction` with supersession and `needs_reconciliation`; full evidence descriptors and shorthand resolution; `tidy`, `doctor`, `views build`; MCP server; Jev `support` and `classification` judgments and the remaining `relevance` points; modules in both marketplaces; clean install on a second machine including Windows-plus-WSL ownership | Scenarios 4, 5, 7 pass; `COMPATIBILITY.md` lists tested host versions |
-| 4 | `export` in both modes; colleague trial; `open-cu` listed; agent-beacon Local-mode importer as an experiment | Scenario 8 passes with a real colleague |
+| 4 | `export` in both modes; colleague trial; agent-beacon Local-mode importer as an experiment | Scenario 8 passes with a real colleague |
 
 Acceptance scenarios (each is an e2e test where it can be, a scripted manual check where it cannot):
 

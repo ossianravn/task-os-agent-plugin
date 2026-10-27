@@ -17,6 +17,11 @@
       "name": "task-os-writing",
       "source": "./plugins/task-os-writing",
       "description": "Rules for the text agents read in a Task OS hub."
+    },
+    {
+      "name": "open-cu",
+      "source": { "source": "github", "repo": "ossianravn/open-computer-use" },
+      "description": "Lets your agent work in any app or site on your screen. Windows 10/11 and macOS 14+."
     }
   ]
 }
