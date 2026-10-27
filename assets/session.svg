@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 840" width="1200" height="840" role="img" aria-labelledby="t d" font-family="'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif">
   <title id="t">What a Task OS session reads and writes</title>
-  <desc id="d">Your agent loads AGENTS.md, briefs from where you stopped and what is going on, looks up who and how while it works, captures tasks, decisions and findings, and writes a handoff that the next session starts from. With Pele Board, brief, capture and handoff draw the tasks and where you stopped on a live board in your browser, drawn from work/.</desc>
+  <desc id="d">Your agent loads AGENTS.md, briefs from where you stopped and what is going on, looks up who and how while it works, checks anything that goes out against the records with verify, captures tasks, decisions and findings, and writes a handoff per workstream that the next session starts from. With Pele Board, brief, capture and handoff draw the tasks and where you stopped on a live board in your browser, drawn from work/.</desc>
   <defs>
     <marker id="aN" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#1F3A5F"/></marker>
     <marker id="aT" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#2A7A76"/></marker>
@@ -18,37 +18,42 @@
   <!-- session steps -->
   <g font-size="19" font-weight="600" fill="#1F2A33">
     <g filter="url(#sh)">
-      <rect x="48" y="86" width="196" height="84" rx="16" fill="#F1E7D6" stroke="#DCCBAE"/>
-      <rect x="275" y="86" width="196" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
-      <rect x="502" y="86" width="196" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
-      <rect x="729" y="86" width="196" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
-      <rect x="956" y="86" width="196" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
+      <rect x="48" y="86" width="160" height="84" rx="16" fill="#F1E7D6" stroke="#DCCBAE"/>
+      <rect x="237" y="86" width="160" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
+      <rect x="426" y="86" width="160" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
+      <rect x="614" y="86" width="160" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
+      <rect x="803" y="86" width="160" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
+      <rect x="992" y="86" width="160" height="84" rx="16" fill="#FFFFFF" stroke="#E2D6C0"/>
     </g>
     <!-- AGENTS.md chip with a document icon -->
-    <path d="M68 104h20l8 8v30h-28z" fill="#FFFFFF" stroke="#9A7B55" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M88 104v8h8" fill="none" stroke="#9A7B55" stroke-width="2"/>
-    <path d="M74 122h16M74 129h16M74 136h10" stroke="#C9B48F" stroke-width="2" stroke-linecap="round"/>
-    <text x="108" y="122">AGENTS.md</text>
-    <text x="108" y="146" font-size="14" font-weight="400" fill="#6E6558">loaded at the start</text>
+    <path d="M64 106h18l7 7v27h-25z" fill="#FFFFFF" stroke="#9A7B55" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M82 106v7h7" fill="none" stroke="#9A7B55" stroke-width="2"/>
+    <path d="M69 122h14M69 128h14M69 134h9" stroke="#C9B48F" stroke-width="2" stroke-linecap="round"/>
+    <text x="98" y="122">AGENTS.md</text>
+    <text x="98" y="146" font-size="13" font-weight="400" fill="#6E6558">loaded first</text>
 
-    <circle cx="303" cy="128" r="15" fill="#1F3A5F"/><text x="303" y="134" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
-    <text x="329" y="122">brief</text>
-    <text x="329" y="146" font-size="14" font-weight="400" fill="#6E6558">where things stand</text>
+    <circle cx="261" cy="128" r="14" fill="#1F3A5F"/><text x="261" y="133" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+    <text x="283" y="122">brief</text>
+    <text x="283" y="146" font-size="13" font-weight="400" fill="#6E6558">where it stands</text>
 
-    <circle cx="530" cy="128" r="15" fill="#1F3A5F"/><text x="530" y="134" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
-    <text x="556" y="122">Your tasks</text>
-    <text x="556" y="146" font-size="14" font-weight="400" fill="#6E6558">work you hand it</text>
+    <circle cx="450" cy="128" r="14" fill="#1F3A5F"/><text x="450" y="133" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+    <text x="472" y="122">Your tasks</text>
+    <text x="472" y="146" font-size="13" font-weight="400" fill="#6E6558">work you hand it</text>
 
-    <circle cx="757" cy="128" r="15" fill="#1F3A5F"/><text x="757" y="134" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
-    <text x="783" y="122">capture</text>
-    <text x="783" y="146" font-size="14" font-weight="400" fill="#6E6558">unprompted</text>
+    <circle cx="638" cy="128" r="14" fill="#1F3A5F"/><text x="638" y="133" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+    <text x="660" y="122">verify</text>
+    <text x="660" y="146" font-size="13" font-weight="400" fill="#6E6558">what goes out</text>
 
-    <circle cx="984" cy="128" r="15" fill="#1F3A5F"/><text x="984" y="134" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
-    <text x="1010" y="122">handoff</text>
-    <text x="1010" y="146" font-size="14" font-weight="400" fill="#6E6558">when work stops</text>
+    <circle cx="827" cy="128" r="14" fill="#1F3A5F"/><text x="827" y="133" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+    <text x="849" y="122">capture</text>
+    <text x="849" y="146" font-size="13" font-weight="400" fill="#6E6558">unprompted</text>
+
+    <circle cx="1016" cy="128" r="14" fill="#1F3A5F"/><text x="1016" y="133" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+    <text x="1038" y="122">handoff</text>
+    <text x="1038" y="146" font-size="13" font-weight="400" fill="#6E6558">when work stops</text>
   </g>
   <g stroke="#B3A386" stroke-width="2.5" marker-end="url(#aG)">
-    <path d="M247 128h22"/><path d="M474 128h22"/><path d="M701 128h22"/><path d="M928 128h22"/>
+    <path d="M211 128h20"/><path d="M400 128h20"/><path d="M589 128h19"/><path d="M777 128h20"/><path d="M966 128h20"/>
   </g>
 
   <!-- the folder -->
@@ -66,37 +71,39 @@
 
   <g fill="#1F2A33">
     <text x="104" y="456" font-size="21" font-weight="700">Where we stopped</text>
-    <text x="104" y="484" font-size="15" fill="#6E6558">handoffs</text>
+    <text x="104" y="484" font-size="15" fill="#6E6558">handoffs · views/overview.md</text>
     <text x="104" y="518" font-size="15" fill="#3F4A54">goal · state · blockers</text>
-    <text x="104" y="540" font-size="15" fill="#3F4A54">one next action</text>
+    <text x="104" y="540" font-size="15" fill="#3F4A54">a next action per workstream</text>
 
     <text x="464" y="456" font-size="21" font-weight="700">What's going on</text>
     <text x="464" y="484" font-size="15" fill="#6E6558">tasks/ · records/</text>
     <text x="464" y="518" font-size="15" fill="#3F4A54">tasks with owner and next step</text>
-    <text x="464" y="540" font-size="15" fill="#3F4A54">decisions · findings · progress</text>
+    <text x="464" y="540" font-size="15" fill="#3F4A54">findings, and what they rest on</text>
 
     <text x="824" y="456" font-size="21" font-weight="700">Who and how</text>
     <text x="824" y="484" font-size="15" fill="#6E6558">people/ · systems/ · ways of working</text>
-    <text x="824" y="518" font-size="15" fill="#3F4A54">who decides, what you can reach</text>
+    <text x="824" y="518" font-size="15" fill="#3F4A54">who decides, how you reach what</text>
     <text x="824" y="540" font-size="15" fill="#3F4A54">how to write to whom</text>
   </g>
   <rect x="990" y="436" width="112" height="26" rx="13" fill="#DCEFEC"/>
   <text x="1046" y="454" font-size="13" font-weight="600" fill="#2A7A76" text-anchor="middle">from setup</text>
 
-  <!-- reads, look-ups and writes -->
+  <!-- reads, look-ups, checks and writes -->
   <g fill="none" stroke-width="2.5">
-    <path d="M340 174C330 260 262 300 248 380" stroke="#C2603A" stroke-dasharray="7 7" marker-end="url(#aR)"/>
-    <path d="M410 174C444 270 540 300 560 380" stroke="#1F3A5F" stroke-dasharray="7 7" marker-end="url(#aN)"/>
-    <path d="M620 174C660 290 900 290 930 380" stroke="#2A7A76" stroke-dasharray="7 7" marker-end="url(#aT)"/>
-    <path d="M810 174C790 270 680 300 666 380" stroke="#1F3A5F" marker-end="url(#aN)"/>
+    <path d="M290 174C285 260 255 300 248 380" stroke="#C2603A" stroke-dasharray="7 7" marker-end="url(#aR)"/>
+    <path d="M360 174C400 270 540 300 560 380" stroke="#1F3A5F" stroke-dasharray="7 7" marker-end="url(#aN)"/>
+    <path d="M520 174C580 290 900 290 930 380" stroke="#2A7A76" stroke-dasharray="7 7" marker-end="url(#aT)"/>
+    <path d="M680 174C676 260 640 300 630 380" stroke="#1F3A5F" stroke-dasharray="7 7" marker-end="url(#aN)"/>
+    <path d="M850 174C830 270 720 300 700 380" stroke="#1F3A5F" marker-end="url(#aN)"/>
     <path d="M1124 174C1180 210 1176 330 1176 470V598Q1176 616 1158 616H258Q240 616 240 598V564" stroke="#C2603A" marker-end="url(#aR)"/>
   </g>
 
   <g font-size="14" font-weight="600" text-anchor="middle">
-    <rect x="275" y="247" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#E9C9B8"/><text x="307" y="265" fill="#C2603A">reads</text>
-    <rect x="440" y="252" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="472" y="270" fill="#1F3A5F">reads</text>
-    <rect x="831" y="313" width="86" height="26" rx="13" fill="#FFFFFF" stroke="#BFDDD9"/><text x="874" y="331" fill="#2A7A76">looks up</text>
-    <rect x="741" y="233" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="773" y="251" fill="#1F3A5F">writes</text>
+    <rect x="243" y="248" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#E9C9B8"/><text x="275" y="266" fill="#C2603A">reads</text>
+    <rect x="410" y="252" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="442" y="270" fill="#1F3A5F">reads</text>
+    <rect x="819" y="313" width="86" height="26" rx="13" fill="#FFFFFF" stroke="#BFDDD9"/><text x="862" y="331" fill="#2A7A76">looks up</text>
+    <rect x="622" y="266" width="70" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="657" y="284" fill="#1F3A5F">checks</text>
+    <rect x="780" y="226" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#C9D3E1"/><text x="812" y="244" fill="#1F3A5F">writes</text>
     <rect x="1124" y="300" width="64" height="26" rx="13" fill="#FFFFFF" stroke="#E9C9B8"/><text x="1156" y="318" fill="#C2603A">writes</text>
   </g>
   <text x="708" y="644" font-size="14" font-weight="600" fill="#C2603A" text-anchor="middle">the next session, in either agent, starts here</text>

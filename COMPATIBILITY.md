@@ -24,6 +24,18 @@ All on Windows 11 Pro (10.0.26200), Node 24.19.0. The local checks ran against t
 | Codex CLI | 0.163.0 | GitHub at `22fc0dc`, isolated `CODEX_HOME` | `marketplace add`, `plugin add` of all three plugins, `codex debug prompt-input` | installed; the model sees the same five skills |
 | Claude Code | 2.1.306 | Pele Board 0.1.0, installed from its own marketplace; checked 2026-10-27 | `show_diagram` with `taskos-tasks` (kanban) and `taskos-plan` (flowchart), drawn from the setup test records for `fixtures/project-b` | both accepted and rendered, in light and dark mode; the README screenshots come from this run |
 
+### Core 0.6.0, 2026-10-27
+
+The changes from the live-project review ([docs/stage-1-findings.md](docs/stage-1-findings.md)), checked against the local working tree.
+
+| Host | Version | Source | Check | Outcome |
+| --- | --- | --- | --- | --- |
+| Claude Code | 2.1.306 | local checkout | `claude plugin validate` on the marketplace and the three plugins | passed |
+| Codex CLI | 0.163.0 | local checkout, isolated `CODEX_HOME` | `marketplace add`, `plugin add task-os@task-os`, `codex debug prompt-input` | installed as 0.6.0; the model sees `task-os:brief`, `task-os:capture`, `task-os:handoff` and `task-os:verify`, each with its full description (verify: 192 characters) |
+| Claude Code | 2.1.306 | local checkout, `--plugin-dir`, non-interactive, read-only tools | `/task-os:verify` on the Q3 draft from `fixtures/project-b/inputs/`, in a hub built by hand from `fixtures/project-b` with the three expected findings | ran twice, about 7 turns, 2.6 minutes and $0.80 each. Both runs returned a claim table, line edits that kept the draft's order, and additions offered apart; both said the draft is not ready and edited nothing. The first run deleted Anna's 41 % instead of crediting it to her, and called the Q2 figure, found only in last quarter's report, evidence-needed. The skill now says both explicitly. The second run matched `expected.yaml`: line 5 credits Anna and names the Q2 report, and lines 6–8 are qualified to July and August |
+
+Not exercised for 0.6.0: `setup` on a real or fixture folder, the `handoff` overview, a correction reaching a deliverable, and installs from GitHub.
+
 The first GitHub attempt failed in both hosts with Git's "Filename too long", because the isolated test folders sat under a 130-character temporary path and the clone's deepest file reached 270 characters. With `core.longpaths` set for the test processes only, both installs passed. Under a normal `C:\Users\<name>\.claude` or `.codex`, the deepest file is about 165 characters, well under Windows' 260-character limit.
 
 Not exercised: a live Codex session, explicit `$task-os:setup` in Codex, the Codex desktop app, WSL and macOS. open-cu and Pele Board install from their own marketplaces, with the commands their READMEs document; their own compatibility records cover those installs, and this repo has not repeated them.

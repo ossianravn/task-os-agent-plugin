@@ -37,8 +37,8 @@ flowchart LR
 ## When to draw
 
 - `brief`: both diagrams, after the written brief, then one line with the board's address.
-- `capture`: `taskos-tasks` again whenever a task is created or changes.
-- `handoff`: both diagrams again from the new handoff.
+- `capture`: `taskos-tasks` again once per reply that created or changed a task, after the last save.
+- `handoff`: `taskos-plan` from the handoff of the workstream worked on last, and `taskos-tasks`.
 - `setup`: both diagrams once the first task and its handoff are written.
 
 When `show_diagram` reports an error, fix the Mermaid at the line it names and draw again. Leave the four status classes unstyled; the board colours them for light and dark mode.

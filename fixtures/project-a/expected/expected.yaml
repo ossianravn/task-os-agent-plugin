@@ -9,13 +9,18 @@ shape: >-
   Azure DevOps directly; order data arrives only through Mette.
 
 adoption:                    # scenario 1
-  untouched: every file in folder/ except AGENTS.md, byte for byte
-  agents_md: the existing ten lines unchanged, followed by exactly one Task OS block
+  untouched: >-
+    every file in folder/ except AGENTS.md, byte for byte; notes/project-log.md may only gain
+    dated session entries at its end, when the person keeps that rule
+  agents_md: >-
+    the existing ten lines unchanged, unless the person approved the offered edit to line 6,
+    followed by exactly one Task OS block
   claude_md: per SPEC.md section 6; either absent or containing only the @AGENTS.md import
   mappings:
     legacy_log: notes/project-log.md
-    communication_doc: docs/how-we-communicate.md
+    communication_docs: [docs/how-we-communicate.md]
     source_roots: [client-files/, people.md, systems.md]
+    deliverable_roots: []      # the folder holds no deliverables; new ones go in work/drafts/
   indexed_sources:
     - notes/project-log.md
     - docs/how-we-communicate.md
@@ -28,9 +33,13 @@ adoption:                    # scenario 1
   conflict_reported:
     existing: AGENTS.md#L6       # append a dated entry to the log at the end of every session
     task_os: >-
-      The legacy log is never rewritten (SPEC.md section 4, rule 1); a session ends with
-      a handoff record.
-    expected: setup shows both texts, asks which wins, and records the answer in work/ways-of-working.md
+      The legacy log is never rewritten (SPEC.md section 4, rules 1 and 2); a session ends with
+      a handoff record and a rewritten work/views/overview.md.
+    expected: >-
+      setup shows both texts and asks whether the dated log entry stays alongside the handoff.
+      If it stays, handoff appends that entry each session. If the handoff replaces it, setup
+      offers to edit line 6 and changes that line only on the person's yes. The answer, its date
+      and any edit go under "Decisions on instructions" in work/ways-of-working.md
   interview:
     answered_by_files:
       - people, roles, authority and channels (people.md, docs/how-we-communicate.md)
@@ -74,24 +83,36 @@ records:
     gist: In August GA4 recorded 4,789 purchases against 5,840 orders in the backend, about 18% short
     basis: reported            # GA4 count observed, order count reported (docs/decisions/002)
     state: current
+    question: How far short of the backend's orders was GA4 in August?
+    source_settles: no         # the log restates both counts
+    settled_by: GA4 property 123456 for August, and Mette's August order report
     cites: [notes/project-log.md#L14-L16]
   - key: F2
     type: finding
     gist: Jonas reports that the duplicate-tag fix shipped to production in release 4.12 on 23 September at 14:05
     basis: reported
     state: current
+    question: When did the duplicate-tag fix reach production?
+    source_settles: partly     # the ticket shows Jonas's report, not the release itself
+    settled_by: the release history of webshop-release in Azure DevOps
     cites: [client-files/tickets/ACME-1187.md#L16-L18]
   - key: F3
     type: finding
     gist: The purchase gap is caused by the consent banner blocking GA4 because Consent Mode is not set up
     basis: inferred            # written as fact in the log, with no evidence
     state: superseded          # by C1
+    question: What causes the purchase gap?
+    source_settles: no         # a conclusion, with no source behind it
+    settled_by: the consent settings in the GTM container
     cites: [notes/project-log.md#L27]
   - key: F4
     type: finding
     gist: After 4.12, GA4 recorded 1,172 purchases against 1,412 orders for 23–28 September, still 17% short
     basis: reported            # decision 002
     state: current
+    question: How far short of the backend was GA4 for 23–28 September, after 4.12?
+    source_settles: partly     # the export shows GA4's count; the order count is in the log only
+    settled_by: Mette's order report for 23–28 September
     cites: [client-files/analytics/ga4-purchases-by-payment-type_20260923-20260928.csv, notes/project-log.md#L31-L33]
   - key: C1
     type: correction
@@ -100,18 +121,26 @@ records:
     reason: The 24 September root cause assumed Consent Mode was missing; the container shows it is set up
     basis: observed
     state: current
+    question: Is Consent Mode set up in the GTM container?
+    source_settles: yes        # the screenshot shows the container's consent settings
     cites: [notes/project-log.md#L36-L37, client-files/screenshots/gtm-consent-settings.png]  # screenshot: reference_only
   - key: F5
     type: finding
     gist: For 23–28 September the gap sits in MobilePay (212 of 431, 51% short); card is 1.8% short and Klarna 9 of 13
     basis: reported            # decision 002
     state: current
+    question: Where does the 23–28 September gap sit, by payment method?
+    source_settles: partly     # GA4's side is in the export; the orders per payment method are in the log only
+    settled_by: Mette's order report for 23–28 September, split by payment method
     cites: [client-files/analytics/ga4-purchases-by-payment-type_20260923-20260928.csv, notes/project-log.md#L38-L40]
   - key: F6
     type: finding
     gist: MobilePay customers may pay in the app and never return to the confirmation page where the purchase event fires
     basis: inferred
     state: candidate
+    question: Why do MobilePay purchases go missing in GA4?
+    source_settles: no         # a hypothesis
+    settled_by: a MobilePay test order on staging once ACME-1204 is there (T-1)
     cites: [notes/project-log.md#L43-L44]
   - key: T-1
     type: task
@@ -137,44 +166,52 @@ verify:                      # scenario 3; input inputs/2026-10-16-status-update
   claims:
     - line: 6
       text: Fejlen med dobbelte GA4-tags er rettet i release 4.12
-      status: supported
+      status: qualified        # Jonas's report, stated as fact; the ticket settles it only partly
       evidence: [F2]
-      rewrite: state it as Jonas's report, with the production date of 23 September
+      edit: state it as Jonas's report, with the production date of 23 September
     - line: 6
       text: købstrackingen virker nu korrekt
       status: conflicting
       evidence: [F4, F5]
-      rewrite: GA4 was still 17% short of the order report for 23–28 September, almost all of it in MobilePay
+      edit: GA4 was still 17% short of the order report for 23–28 September, almost all of it in MobilePay
     - line: 7
       text: Det resterende hul skyldes cookiebanneret
       status: conflicting      # the inference written as fact; superseded by C1
       evidence: [F3, C1]
-      rewrite: drop it; the gap sits in MobilePay, and the cause is a hypothesis being tested (F6)
+      edit: drop it; the gap sits in MobilePay, and the cause is a hypothesis being tested (F6)
     - line: 8
       text: Kortbetalinger ligger nu inden for 2 %
       status: qualified
       evidence: [F5]
-      rewrite: name the period (23–28 September) and the source (Mette's order report)
+      edit: name the period (23–28 September) and the source (Mette's order report)
     - line: 9
       text: MobilePay-rettelsen (ACME-1204) går i produktion i næste uge
       status: evidence-needed  # only a staging estimate exists, as of 13 October
       evidence: [T-1]
-      rewrite: Jonas expects ACME-1204 on staging; no production date is agreed
+      edit: Jonas expects ACME-1204 on staging; no production date is agreed
     - line: 10
       text: Vi når målet om 2 % for alle betalingsformer inden udgangen af oktober
       status: evidence-needed  # assumed
       evidence: []
-      rewrite: drop the forecast, or state the target without promising it
+      edit: drop the forecast, or state the target without promising it
   remaining_questions:
     - Is ACME-1204 on staging yet? The last observation is from 13 October.
     - The newest GA4 numbers cover 23–28 September; check them again before sending.
-  practices: the revised draft is in Danish, at most ten lines, and names the source of each number
+  practices: >-
+    the edits keep the draft's structure, order and wording; with them it is in Danish, at most
+    ten lines, and names the source of each number
 
 supersession:                # scenario 4
-  steps: capture F3; write a knowledge note "Purchase gap" whose derived_from cites F3; capture C1; reindex --full
+  steps: >-
+    capture F3; write a knowledge note "Purchase gap" whose derived_from cites F3; capture a
+    progress record for a status mail sent to Karen whose deliverable.carries lists F3; capture
+    C1; reindex --full
   recall_current: C1 for "What causes the purchase gap?"; F3 is not returned as current
   include_superseded: F3 with state superseded, and C1's reason
   needs_reconciliation: the "Purchase gap" note, with C1 as the replacement
+  carried_by: >-
+    C1 lists the status mail's progress record; a correction to Karen waits in work/drafts/, and
+    one task names the mail and Karen as what to correct
 
 source_states:               # scenario 6, run against a temporary copy of folder/
   changed: >-

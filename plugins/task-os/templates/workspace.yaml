@@ -4,10 +4,11 @@ kind: hub
 name: <project name>
 timezone: <IANA timezone, such as Europe/Copenhagen>
 language: { default: <en>, outgoing: <da> }   # outgoing: text other people read
-mappings:                     # existing files, read as sources and never rewritten
+mappings:                     # existing files and folders; no existing file is rewritten
   legacy_log: <path>          # omit when there is none
-  communication_doc: <path>   # omit when there is none
-  source_roots: []            # folders or single files; text files are read as sources
-  source_exclude: []          # never read as sources
+  communication_docs: []      # how to write to whom; read before writing to anyone
+  source_roots: []            # raw material: exports, saved mail, tickets; folders or single files, read as sources
+  deliverable_roots: []       # what was made for others; searched, and new deliverables go in the first one
+  source_exclude: []          # never read
 modules: { grill: false, writing: false, jev-9000: false, open-cu: false, pele-board: false }
 integrations: []              # systems reached directly through a host connection: { system, resource }

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Task OS verify"
+  short_description: "Check a draft's claims before it goes out"
+  default_prompt: "Verify this draft against the Task OS records."

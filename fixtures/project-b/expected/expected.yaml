@@ -14,19 +14,21 @@ adoption:                    # scenarios 1 and 9
   claude_md: per SPEC.md section 6; either absent or containing only the @AGENTS.md import
   mappings:
     legacy_log: none
-    communication_doc: none
-    source_roots: [mail/, from-client/, delivered/]
+    communication_docs: []
+    source_roots: [mail/, from-client/]
+    deliverable_roots: [delivered/]   # last quarter's report: what Anna was told; the Q3 summary goes here too
   indexed_sources:
     - mail/2026-07-20-re-nyhedsbrevet-i-2-kvartal.eml       # CRLF, UTF-8, 8bit
     - mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml
     - mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml
     - from-client/nyhedsbrev-q3.csv                         # BOM, semicolons, DD-MM-YYYY dates
+  indexed_deliverables:
     - delivered/2026-07-15-nyhedsbrev-q2-rapport.md
   skipped_sources: []
   interview:                 # an occasional job: the first four questions, then the closing module question
     asks:
       - the work, the person's role and what success looks like
-      - how work reaches the person and how it is delivered (mail from Anna; the report goes to Anna, who forwards it)
+      - how work reaches the person and how it is delivered (mail from Anna; the report goes to Anna, who forwards it; delivered reports are kept in delivered/)
       - each system the work depends on and how it is reached (Mailchimp, through Anna)
       - current priorities and the first task (the Q3 summary)
       - modules and Jev judgment kinds
@@ -49,6 +51,8 @@ records:
     type: system
     access: via_person
     supplied_by: P-anna
+    can_show: opens and clicks per campaign, against all recipients, for the campaigns in an export
+    cannot_show: delivered mails and bounces, so not Mailchimp's own open rate; campaigns left out of the export
     cites: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L16, mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml#L13]
   - key: T-1
     type: task
@@ -65,6 +69,9 @@ records:
     gist: Anna reports a Q3 open rate of 41%, the highest the newsletter has had
     basis: reported
     state: current
+    question: What was the newsletter's open rate in Q3?
+    source_settles: no         # Anna's mail states the figure; it cannot show it
+    settled_by: Mailchimp's figures for every Q3 campaign, September included
     cites: [mail/2026-10-01-q3-opsummering-af-nyhedsbrevet.eml#L14]
   - key: F2
     type: finding
@@ -74,12 +81,16 @@ records:
     basis: observed
     scope: 2026-07-02 to 2026-08-20, the rows in the export
     state: current
+    question: What do the export's July and August campaigns show?
+    source_settles: yes
     cites: [from-client/nyhedsbrev-q3.csv#L1-L5]
   - key: F3
     type: finding
     gist: nyhedsbrev-q3.csv holds no September campaigns, although its name says Q3
     basis: observed
     state: current
+    question: Which months does the export cover?
+    source_settles: yes
     cites: [from-client/nyhedsbrev-q3.csv#L2-L5, mail/2026-10-05-re-q3-opsummering-af-nyhedsbrevet.eml#L13]
 
 ways_of_working:             # written by setup; no communication document to point at
@@ -103,40 +114,42 @@ verify:                      # scenario 9; input inputs/2026-10-06-q3-rapport-ud
   claims:
     - line: 5
       text: Åbningsraten var 41 % i 3. kvartal
-      status: conflicting      # reported for Q3; observed 37.8% for July and August only
+      status: evidence-needed  # Anna's report, stated as fact; her mail cannot settle it (F1), and 37.8% covers July and August only
       evidence: [F1, F2, F3]
-      rewrite: >-
+      edit: >-
         Name both sources: Anna gives 41% for the quarter; the Mailchimp export for July and
         August shows 37.8%; September is not in the export.
     - line: 5
       text: den højeste nogensinde
       status: evidence-needed  # Anna's word; our reports cover Q1 (33.9%) and Q2 (35.2%) only, and one Q2 campaign reached 41.3%
       evidence: [F1]
-      rewrite: compare with the quarters we have figures for, once the Q3 figure is settled
+      edit: compare with the quarters we have figures for, once the Q3 figure is settled
     - line: 5
       text: en klar stigning fra 35,2 % i 2. kvartal
-      status: supported
+      status: qualified        # 35.2% is what the Q2 report told Anna; the export behind it is not in the folder
       evidence: [delivered/2026-07-15-nyhedsbrev-q2-rapport.md#L7]
-      rewrite: keep; it depends on the Q3 figure above
+      edit: keep, as the figure from the Q2 report of 15 July; the comparison waits on the Q3 figure above
     - line: 6
       text: 6,5 % af modtagerne klikkede på et link
       status: qualified
       evidence: [F2]
-      rewrite: say July and August
+      edit: say July and August
     - line: 7
       text: '"Klar til skolestart" var kvartalets bedste nyhedsbrev med 39 % åbninger'
       status: qualified
       evidence: [F2]
-      rewrite: the best of the four July and August campaigns
+      edit: the best of the four July and August campaigns
     - line: 8
       text: Vi sendte 4 nyhedsbreve i kvartalet
       status: qualified
       evidence: [F2, F3]
-      rewrite: four in July and August; September is unknown
+      edit: four in July and August; September is unknown
   remaining_questions:
     - Which campaigns went out in September, and what were their numbers?
     - How did Anna arrive at 41%? It could include September, or use Mailchimp's own rate, which leaves out bounced mail.
-  practices: the revised draft has no abbreviations, fits on one page, and goes to Anna
+  practices: >-
+    the edits keep the draft's structure, order and wording; with them it has no abbreviations,
+    fits on one page, and goes to Anna
 
 continuation:                # scenario 9
   goal: A one-page Q3 newsletter summary in Danish, with Anna by Monday 19 October for the board meeting on 22 October
@@ -163,8 +176,8 @@ retrieval:                   # scenario 10; expect = must appear in the top five
   - q: Who sends us the newsletter numbers?
     expect: [S-mailchimp, P-anna]
   - q: What was the click rate in Q2?
-    expect: []                 # answered only by the delivered report
-    sources: [delivered/2026-07-15-nyhedsbrev-q2-rapport.md#L8]
+    expect: []                 # answered only by the delivered report, as what Anna was told
+    deliverables: [delivered/2026-07-15-nyhedsbrev-q2-rapport.md#L8]
     needs: glossary alias click rate ↔ CTR
   - q: When is the board meeting?
     expect: [T-1]
